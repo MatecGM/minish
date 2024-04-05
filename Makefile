@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/03 17:05:03 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/05 17:08:17 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR = srcs
 OBJ_DIR = obj
 
 SRCS = main.c\
+		ft_split_quote.c\
 
 LIBFT = libft/libft.a
 

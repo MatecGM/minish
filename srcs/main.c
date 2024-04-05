@@ -6,11 +6,11 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/03 19:02:22 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:13:47 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-include "minishell.h"
+#include "minishell.h"
 
 void	print_beautiful_header()
 {
@@ -30,6 +30,20 @@ void	print_beautiful_header()
 	close(fd);
 }
 
+void	print_splitquote_test(char *str)
+{
+	int		i;
+	char	**splitted;
+
+	i = 0;
+	splitted = ft_split_quote(str);
+	while (splitted && splitted[i])
+	{
+		printf("-%s-\n", splitted[i]);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
@@ -38,6 +52,6 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		str = readline("ඞ-> ");
-		printf("%s\n", str);
+		print_splitquote_test(str);
 	}
 }
