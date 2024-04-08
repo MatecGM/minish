@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 16:36:04 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/08 18:38:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ typedef struct s_env
 
 char	**ft_split_quote(char *str);
 void	ft_envdelone(t_env *env, void (*del)(void *));
+char	**ft_tokenizer(char *str);
 
 #endif

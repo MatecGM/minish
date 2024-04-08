@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/08 15:01:32 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/08 18:39:58 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,14 @@ OBJ_DIR = obj
 SRCS = main.c\
 		parsing/ft_split_quote.c\
 		builtins.c\
-		arg_struct/ft_argadd_front.c\
-		arg_struct/ft_argadd_front.c\
-		arg_struct/ft_argclear.c\
-		arg_struct/ft_argdelone.c\
-		arg_struct/ft_arglast.c\
-		arg_struct/ft_argnew.c\
-		arg_struct/ft_argsize.c
+		env_struct/ft_envadd_front.c\
+		env_struct/ft_envadd_front.c\
+		env_struct/ft_envclear.c\
+		env_struct/ft_envdelone.c\
+		env_struct/ft_envlast.c\
+		env_struct/ft_envnew.c\
+		env_struct/ft_envsize.c\
+		parsing/ft_tokenizer.c
 
 
 LIBFT = libft/libft.a

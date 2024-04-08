@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokeniser.c                                     :+:      :+:    :+:   */
+/*   ft_envnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/08 16:55:58 by mbico            ###   ########.fr       */
+/*   Created: 2023/11/03 18:49:23 by fparis            #+#    #+#             */
+/*   Updated: 2024/04/08 17:50:12 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	countel(char *str)
+t_env	*ft_envnew(char *name, t_type type, void *content)
 {
-	int		nb;
-	char	*ptr;
+	t_env	*env;
 
-	nb = 0;
-	ptr = str;
-	while(*ptr)
-	{
-		ft_strstr(ptr, "")
-		nb ++;
-	}
-}
-
-char	**ft_tokeniser(char *str)
-{
-	
-	free(str);
+	env = ft_calloc(sizeof(t_list), 1);
+	if (!env)
+		return (NULL);
+	env->name = name;
+	env->content = content;
+	env->next = NULL;
+	return (env);
 }

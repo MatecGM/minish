@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fparis <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 11:50:04 by fparis            #+#    #+#              #
-#    Updated: 2024/03/05 19:44:22 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/08 17:47:59 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRCS =  ft_atoi.c\
 	ft_power.c\
 	ft_revdigit.c\
 	ft_max.c\
-	ft_min.c
+	ft_min.c\
+	ft_isspace.c
 
 
 OBJS = $(SRCS:.c=.o)

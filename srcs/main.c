@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 15:01:00 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/08 18:39:18 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	parse(char *str)
 	char	**splitted;
 
 	i = 0;
-	splitted = ft_split_quote(str);
+	splitted = ft_tokenizer(str);
 	while (splitted && splitted[i])
 	{
 		printf("-%s-\n", splitted[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 11:08:17 by fparis            #+#    #+#             */
-/*   Updated: 2024/03/05 19:44:40 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:47:43 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int		ft_power(int nb, int power);
 int		ft_revdigit(int nb, int nb_digit);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
+int		ft_isspace(char chara);
 
 #endif

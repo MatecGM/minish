@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_envnew.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 18:49:23 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 16:35:36 by fparis           ###   ########.fr       */
+/*   Created: 2024/04/08 17:43:52 by fparis            #+#    #+#             */
+/*   Updated: 2024/04/08 17:48:00 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_env	*ft_envnew(char *name, t_type type, void *content)
+int	ft_isspace(char chara)
 {
-	t_env	*env;
-
-	env = ft_calloc(sizeof(t_list), 1);
-	if (!env)
-		return (NULL);
-	env->name = name;
-	env->type = type;
-	env->content = content;
-	env->next = NULL;
-	return (env);
+	return (chara == ' ' || chara == '\f' || chara == '\n' || chara == '\r'
+		|| chara == '\t' || chara == '\v');
 }
