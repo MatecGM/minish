@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 17:13:47 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/05 22:22:07 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_beautiful_header()
 	char	*line;
 	int		fd;
 	int		fd_stdin;
-	
+
 	printf ("\033c\033[0;35m");
 	fd = open("beautiful header", O_RDONLY);
 	fd_stdin = dup(0);
@@ -52,6 +52,8 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		str = readline("ඞ-> ");
+		if (str && str[0])
+			add_history(str);
 		print_splitquote_test(str);
 	}
 }

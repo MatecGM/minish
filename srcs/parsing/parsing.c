@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 17:08:25 by fparis           ###   ########.fr       */
+/*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
+/*   Updated: 2024/04/05 20:58:39 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	check_separator(t_arg *tab, int i)
-{
-	
-}
 
-void	echo(t_arg *tab)
-{
-	int	i;
 
-	i = 0;
-	while (tab[i].type != separator)
-	{
-		if (i > 0)
-	}
+t_arg	*parsing(char *str)
+{
+	free(str);
 }
