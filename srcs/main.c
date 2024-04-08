@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 22:22:07 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:01:00 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_beautiful_header()
 	close(fd);
 }
 
-void	print_splitquote_test(char *str)
+void	parse(char *str)
 {
 	int		i;
 	char	**splitted;
@@ -54,6 +54,6 @@ int	main(int argc, char **argv, char **env)
 		str = readline("ඞ-> ");
 		if (str && str[0])
 			add_history(str);
-		print_splitquote_test(str);
+		parse(str);
 	}
 }

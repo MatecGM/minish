@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
+#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/05 22:20:30 by mbico            ###   ########.fr        #
+#    Updated: 2024/04/08 15:01:32 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,16 @@ SRC_DIR = srcs
 OBJ_DIR = obj
 
 SRCS = main.c\
-		utils/ft_split_quote.c\
-		builtins.c
+		parsing/ft_split_quote.c\
+		builtins.c\
+		arg_struct/ft_argadd_front.c\
+		arg_struct/ft_argadd_front.c\
+		arg_struct/ft_argclear.c\
+		arg_struct/ft_argdelone.c\
+		arg_struct/ft_arglast.c\
+		arg_struct/ft_argnew.c\
+		arg_struct/ft_argsize.c
+
 
 LIBFT = libft/libft.a
 

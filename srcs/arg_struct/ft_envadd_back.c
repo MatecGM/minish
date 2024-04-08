@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_envadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 21:27:09 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/05 20:46:34 by mbico            ###   ########.fr       */
+/*   Created: 2023/11/08 20:28:13 by mbico             #+#    #+#             */
+/*   Updated: 2024/04/08 16:35:16 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_argclear(t_arg **arg, void (*del)(void *))
+void	ft_envadd_back(t_env **env, t_env *new)
 {
-	if (arg && *arg && del)
+	t_env	*tmp;
+
+	if (*env == NULL)
 	{
-		if (arg[0]->next)
-			ft_lstclear(&arg[0]->next, del);
-		ft_lstdelone(*arg, del);
-		*arg = NULL;
+		*env = new;
+		return ;
 	}
-	else if (arg)
-		*arg = NULL;
+	tmp = *env;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }

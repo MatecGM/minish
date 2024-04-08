@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 22:32:26 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/08 14:53:30 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ void	cd(char *new_path)
 {
 	chdir(new_path);
 	//faut changer la variable d'environnement pwd manuellement
+}
+
+void	pwd()
+{
+	char tab[69420];
+
+	getcwd(tab, 69420);
+	printf("%s\n", tab);
 }

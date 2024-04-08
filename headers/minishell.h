@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 20:36:21 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/08 16:36:04 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ typedef enum	s_type
 	parameter,
 }	t_type;
 
-typedef struct s_arg
+typedef struct s_env
 {
 	char			*name;
-	t_type			type;
-	void			*content;
-	struct s_arg	*next;
-}	t_arg;
+	char			*content;
+	struct s_env	*next;
+}	t_env;
 
 char	**ft_split_quote(char *str);
+void	ft_envdelone(t_env *env, void (*del)(void *));
 
 #endif

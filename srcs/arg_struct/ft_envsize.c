@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_argdelone.c                                     :+:      :+:    :+:   */
+/*   ft_envsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 20:56:04 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/05 20:45:22 by mbico            ###   ########.fr       */
+/*   Created: 2023/11/06 12:02:40 by fparis            #+#    #+#             */
+/*   Updated: 2024/04/08 16:35:40 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_argdelone(t_arg *arg, void (*del)(void *))
+int	ft_envsize(t_env *env)
 {
-	if (!arg || !del)
-		return ;
-	del(arg->content);
-	arg->next = NULL;
-	free(arg);
+	int		len;
+	t_env	*ptr;
+
+	len = 0;
+	ptr = env;
+	while (ptr)
+	{
+		len++;
+		ptr = ptr->next;
+	}
+	return (len);
 }

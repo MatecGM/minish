@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arglast.c                                       :+:      :+:    :+:   */
+/*   ft_envadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 13:31:02 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/05 20:40:10 by mbico            ###   ########.fr       */
+/*   Created: 2023/11/08 17:22:54 by mbico             #+#    #+#             */
+/*   Updated: 2024/04/08 16:35:15 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_arg	*ft_arglast(t_arg *arg)
+void	ft_envadd_front(t_env **env, t_env *new)
 {
-	t_arg	*ptr;
+	t_env	*tmp;
 
-	if (arg == NULL)
-		return (NULL);
-	ptr = arg;
-	while (ptr->next != NULL)
-		ptr = ptr->next;
-	return (ptr);
+	tmp = new;
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = *env;
+	*env = new;
 }
