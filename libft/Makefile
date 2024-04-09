@@ -55,6 +55,13 @@ SRCS = ft_bzero.c \
 		printf/ft_printf.c \
 		printf/ft_putnbr_base.c\
 		printf/ft_putnbr.c \
+		ft_isspace.c\
+		ft_intlen.c\
+		ft_max.c\
+		ft_min.c\
+		ft_power.c\
+		ft_strcmp.c\
+		ft_splitlen.c
 
 OBJS = ${SRCS:.c=.o}
 

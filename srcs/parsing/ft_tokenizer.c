@@ -6,15 +6,15 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/09 17:10:08 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/09 18:14:54 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_bool	is_delimiter(char chara)
-{	
-	if (chara == '|' || chara == '>' || chara == '<' || chara == '&')
+{
+	if (chara == '|' || chara == '>' || chara == '<')
 		return (TRUE);
 	return (FALSE);
 }
@@ -42,25 +42,23 @@ static int	countel(char *str)
 
 int	split_tab(char *str, int i, int *i_tab, char **tab)
 {
-	int	type;
+	t_bool	type;
 	int end;
-	int	i2;
+	int	j;
 
-	type = 0;
-	if (is_delimiter(str[i]))
-		type = 1;
+	type = is_delimiter(str[i]);
 	end = i;
 	while (str[end] && is_delimiter(str[end]) == type)
 		end++;
-	tab[*i_tab] = malloc((end - i) * sizeof(char));
+	tab[*i_tab] = ft_calloc((end - i), sizeof(char));
 	if (!tab[*i_tab])
 		return (-1);
-	i2 = 0;
+	j = 0;
 	while (i < end)
 	{
-		tab[*i_tab][i2] = str[i];
+		tab[*i_tab][j] = str[i];
 		i++;
-		i2++;
+		j++;
 	}
 	*i_tab += 1;
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:26:57 by mbico             #+#    #+#             */
-/*   Updated: 2024/03/27 18:20:51 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/09 18:03:16 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "gnl/get_next_line.h"
 # include "printf/ft_printf.h"
 
-typedef enum s_bool
+typedef enum e_bool
 {
 	ERROR = -1,
 	FALSE,
@@ -75,5 +75,12 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_isspace(char chara);
+int		ft_intlen(int nb);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
+int		ft_power(int nb, int power);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_splitlen(char **tab);
 
 #endif

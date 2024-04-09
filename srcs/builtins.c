@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 14:53:30 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:18:57 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	print_error(char *str1, char *str2)
+{
+	if (str1)
+		ft_putstr_fd(str1, 2);
+	if (str2)
+		ft_putstr_fd(str2, 2);
+	ft_putstr_fd("\n", 2);
+}
 
 void	echo(char **tab)
 {
@@ -33,9 +42,20 @@ void	echo(char **tab)
 		printf("\n");
 }
 
-void	cd(char *new_path)
+void	cd(char **tab)
 {
-	chdir(new_path);
+	//g2rer home variable si aucun arg
+	if (ft_splitlen(tab) > 2)
+		print_error("cd: string not in pwd: ", tab[1]);
+	if (access(tab[1], F_OK) == 0)
+	{
+		if (access(tab[1], R_OK) == 0)
+			chdir(tab[1]);
+		else
+			print_error("cd: permission denied: ", tab[1]);
+	}
+	else
+		print_error("cd: no such file or directory: ", tab[1]);
 	//faut changer la variable d'environnement pwd manuellement
 }
 

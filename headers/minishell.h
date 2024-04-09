@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 18:38:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:25:31 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/headers/libft.h"
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
@@ -25,19 +25,15 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef enum s_bool
-{
-	ERROR = -1,
-	FALSE,
-	TRUE,
-}			t_bool;
-
 typedef enum	s_type
 {
 	syntax_error = -1,
-	separator,
+	pipe,
+	heredoc,
+	app,
+	infile,
+	outfile,
 	command,
-	parameter,
 }	t_type;
 
 typedef struct s_env
