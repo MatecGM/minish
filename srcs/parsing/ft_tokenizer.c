@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/08 18:50:03 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:10:08 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,9 @@ char	**ft_tokenizer(char *str)
 	int		i_tab;
 
 	len = countel(str);
-	tab = malloc((len + 1) * sizeof(char *));
+	tab = ft_calloc((len + 1), sizeof(char *));
 	if (!tab)
 		return (NULL);
-	tab[len] = NULL;
 	i = 0;
 	i_tab = 0;
 	while (str[i])
