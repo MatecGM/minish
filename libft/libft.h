@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:26:57 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/09 18:03:16 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/10 20:05:15 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "gnl/get_next_line.h"
 # include "printf/ft_printf.h"
+# include <stdarg.h>
 
 typedef enum e_bool
 {
@@ -81,6 +82,8 @@ int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 int		ft_power(int nb, int power);
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_splitlen(char **tab);
+int		ft_strtablen(char **tab);
+char	*ft_vajoin(char *str, ...);
+void	ft_free_tab(char **tab);
 
 #endif

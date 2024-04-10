@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/09 17:18:57 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/10 22:19:25 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	echo(char **tab)
 void	cd(char **tab)
 {
 	//g2rer home variable si aucun arg
-	if (ft_splitlen(tab) > 2)
+	if (ft_strtablen(tab) > 2)
 		print_error("cd: string not in pwd: ", tab[1]);
 	if (access(tab[1], F_OK) == 0)
 	{

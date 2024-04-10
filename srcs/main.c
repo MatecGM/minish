@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/08 18:39:18 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/10 22:26:07 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	parse(char *str)
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
+	char	**new_env;
 
+	//mettre la variable d'env SHLVL en + 1
+	new_env = dup_env_tab(env);
 	print_beautiful_header();
 	while (1)
 	{

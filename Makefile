@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/08 18:39:58 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/10 21:55:06 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ SRCS = main.c\
 		env_struct/ft_envlast.c\
 		env_struct/ft_envnew.c\
 		env_struct/ft_envsize.c\
-		parsing/ft_tokenizer.c
-
+		parsing/ft_tokenizer.c\
+		env.c
 
 LIBFT = libft/libft.a
 
