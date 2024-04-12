@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/10 22:31:52 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/12 18:03:40 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,51 @@ char	**dup_env_tab(char **old_env)
 	return (new_env);
 }
 
-void	remove_var(char **env, char *name)
+void	remove_var(char ***env, char *name)
 {
-	//j'attends le grep de ton pipex
+	int		index;
+	char	**new_env;
+	int		i;
+	int		i2;
+
+	index = get_env_index(*env, name);
+	if (index < 0)
+		return ;
+	new_env = ft_calloc(ft_strtablen(*env), sizeof(char **));
+	if (!new_env)
+		//inserer exit qui free env;
+	i = 0;
+	i2 = 0;
+	while (env[i])
+	{
+		if (i != index)
+		{
+			new_env[i2] = env[i];
+
+		}
+	}
 }
 
-void	add_var(char **env, char *name, char *value)
+void	add_var(char ***env, char *name, char *value)
 {
 	int		i;
 	char	**new_env;
 
-	if (get_env_index(env, name))
-	{
-		remove_var(env, name);
-		add_var(env, name, value);
-	}
-	new_env = ft_calloc(ft_strtablen(env) + 1, sizeof(char **));
+	if (get_env_index(*env, name) >= 0)
+		remove_var(env, name); //bien check ce cas la parce que changement de tab inter fonction suspect
+	new_env = ft_calloc(ft_strtablen(*env) + 2, sizeof(char **));
 	i = 0;
-	while (new_env && env[i])
+	while (new_env && *env[i])
 	{
-		new_env[i] = env[i];
+		new_env[i] = *env[i];
 		i++;
 	}
-	ft_free_tab(env);
 	if (new_env)
-		new_env[i] = ft_vajoin(name, "=", value, NULL);
-	if (!new_env || !new_env[i])
 	{
-		ft_free_tab(new_env);
-		//inserer exit ici
+		free(*env);
+		*env = new_env;
+		new_env[i] = ft_vajoin(name, "=", value, NULL);
 	}
+	if (!new_env || !new_env[i])
+		//inserer exit qui free env
 }
