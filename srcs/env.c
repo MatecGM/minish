@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/12 18:03:40 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:53:56 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_env_value(char **env, char *name)
 	char	*res;
 	int		index;
 
-	index = get_env_index(name);
+	index = get_env_index(env, name);
 	i = 0;
 	i2 = 1;
 	while (index >= 0 && env[index][i] && env[index][i] != '=')
@@ -89,16 +89,20 @@ void	remove_var(char ***env, char *name)
 	new_env = ft_calloc(ft_strtablen(*env), sizeof(char **));
 	if (!new_env)
 		//inserer exit qui free env;
+	free(*env[index]);
 	i = 0;
 	i2 = 0;
-	while (env[i])
+	while (*env[i])
 	{
 		if (i != index)
 		{
-			new_env[i2] = env[i];
-
+			new_env[i2] = *env[i];
+			i2++;
 		}
+		i++;
 	}
+	free(*env);
+	*env = new_env;
 }
 
 void	add_var(char ***env, char *name, char *value)
@@ -118,9 +122,10 @@ void	add_var(char ***env, char *name, char *value)
 	if (new_env)
 	{
 		free(*env);
-		*env = new_env;
 		new_env[i] = ft_vajoin(name, "=", value, NULL);
+		*env = new_env;
 	}
 	if (!new_env || !new_env[i])
+		return ;
 		//inserer exit qui free env
 }

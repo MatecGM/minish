@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/10 22:19:25 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:54:49 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ void	cd(char **tab)
 	//faut changer la variable d'environnement pwd manuellement
 }
 
-void	pwd()
+void	pwd(char **tab)
 {
 	char tab[69420];
 
+	if (ft_strtablen(tab) > 1)
+		ft_putstr_fd("pwd: too many arguments\n", 2);
 	getcwd(tab, 69420);
 	printf("%s\n", tab);
 }

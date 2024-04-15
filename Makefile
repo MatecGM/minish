@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
+#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/10 21:55:06 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/15 17:57:16 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ OBJ_DIR = obj
 
 SRCS = main.c\
 		parsing/ft_split_quote.c\
-		builtins.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envclear.c\
@@ -29,7 +28,6 @@ SRCS = main.c\
 		env_struct/ft_envnew.c\
 		env_struct/ft_envsize.c\
 		parsing/ft_tokenizer.c\
-		env.c
 
 LIBFT = libft/libft.a
 

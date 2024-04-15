@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/10 22:26:07 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:03:24 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 	char	**new_env;
 
+	
 	//mettre la variable d'env SHLVL en + 1
-	new_env = dup_env_tab(env);
-	print_beautiful_header();
-	while (1)
-	{
-		str = readline("ඞ-> ");
-		if (str && str[0])
-			add_history(str);
-		parse(str);
-	}
+	// new_env = dup_env_tab(env);
+	// print_beautiful_header();
+	// while (1)
+	// {
+	// 	str = readline("ඞ-> ");
+	// 	if (str && str[0])
+	// 		add_history(str);
+	// 	parse(str);
+	// }
 }

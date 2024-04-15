@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/10 22:20:12 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:01:51 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 
 typedef enum	s_type
 {
-	syntax_error = -1,
+	tfirst,
 	tpipe,
 	theredoc,
-	tapp,
 	tinfile,
 	toutfile,
-	command,
+	tappend,
+	tcommand,
 }	t_type;
 
 typedef struct s_env
@@ -42,6 +42,21 @@ typedef struct s_env
 	char			*content;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct	s_divpipe
+{
+	char				**cmd;
+	char				*cmd_path;
+	struct s_redirect	*redirect;
+	struct s_divpipe	*next;
+}	t_divpipe;
+
+typedef struct	s_redirect
+{
+	t_type				type;
+	char				*arg;
+	struct s_redirect	*next;
+}	t_redirect;
 
 char	**ft_split_quote(char *str);
 void	ft_envdelone(t_env *env, void (*del)(void *));
