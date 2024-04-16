@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/15 17:53:56 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:46:21 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,27 +105,24 @@ void	remove_var(char ***env, char *name)
 	*env = new_env;
 }
 
-void	add_var(char ***env, char *name, char *value)
+void	add_var(char ***env, char *env_var)
 {
 	int		i;
 	char	**new_env;
 
-	if (get_env_index(*env, name) >= 0)
-		remove_var(env, name); //bien check ce cas la parce que changement de tab inter fonction suspect
+	if (get_env_index(*env, env_var) >= 0)
+		remove_var(env, env_var); //bien check ce cas la parce que changement de tab inter fonction suspect
 	new_env = ft_calloc(ft_strtablen(*env) + 2, sizeof(char **));
+	if (!new_env)
+		return ;
+		//inserer exit qui free env
 	i = 0;
-	while (new_env && *env[i])
+	while (*env[i])
 	{
 		new_env[i] = *env[i];
 		i++;
 	}
-	if (new_env)
-	{
-		free(*env);
-		new_env[i] = ft_vajoin(name, "=", value, NULL);
-		*env = new_env;
-	}
-	if (!new_env || !new_env[i])
-		return ;
-		//inserer exit qui free env
+	free(*env);
+	new_env[i] = env_var;
+	*env = new_env;
 }

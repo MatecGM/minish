@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/15 17:54:49 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:34:01 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_error(char *str1, char *str2)
+void	print_error(char *str1, char *str2, char *str3)
 {
 	if (str1)
 		ft_putstr_fd(str1, 2);
 	if (str2)
 		ft_putstr_fd(str2, 2);
+	if (str3)
+		ft_putstr_fd(str3, 2);
 	ft_putstr_fd("\n", 2);
 }
 
@@ -46,16 +48,16 @@ void	cd(char **tab)
 {
 	//g2rer home variable si aucun arg
 	if (ft_strtablen(tab) > 2)
-		print_error("cd: string not in pwd: ", tab[1]);
+		print_error("cd: string not in pwd: ", tab[1], NULL);
 	if (access(tab[1], F_OK) == 0)
 	{
 		if (access(tab[1], R_OK) == 0)
 			chdir(tab[1]);
 		else
-			print_error("cd: permission denied: ", tab[1]);
+			print_error("cd: permission denied: ", tab[1], NULL);
 	}
 	else
-		print_error("cd: no such file or directory: ", tab[1]);
+		print_error("cd: no such file or directory: ", tab[1], NULL);
 	//faut changer la variable d'environnement pwd manuellement
 }
 

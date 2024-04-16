@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
+#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/15 17:57:16 by mbico            ###   ########.fr        #
+#    Updated: 2024/04/16 18:40:53 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = main.c\
 		env_struct/ft_envnew.c\
 		env_struct/ft_envsize.c\
 		parsing/ft_tokenizer.c\
+		env.c\
 
 LIBFT = libft/libft.a
 

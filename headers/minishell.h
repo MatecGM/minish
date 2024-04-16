@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/15 20:01:51 by mbico            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:34:11 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_envdelone(t_env *env, void (*del)(void *));
 char	**ft_tokenizer(char *str);
 int		get_env_index(char **env, char *name);
 char	**dup_env_tab(char **old_env);
-char	*get_env_value(char *env_var);
+char	*get_env_value(char **env_var, char *name);
+void	print_error(char *str1, char *str2, char *str3);
 
 #endif
