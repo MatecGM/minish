@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/16 20:34:01 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:23:16 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_error(char *str1, char *str2, char *str3)
 	ft_putstr_fd("\n", 2);
 }
 
-void	echo(char **tab)
+void	ft_echo(char **tab)
 {
 	int		i;
 	t_bool	parameter;
@@ -44,7 +44,7 @@ void	echo(char **tab)
 		printf("\n");
 }
 
-void	cd(char **tab)
+void	ft_cd(char **tab)
 {
 	//g2rer home variable si aucun arg
 	if (ft_strtablen(tab) > 2)
@@ -61,12 +61,12 @@ void	cd(char **tab)
 	//faut changer la variable d'environnement pwd manuellement
 }
 
-void	pwd(char **tab)
+void	ft_pwd(char **tab)
 {
-	char tab[69420];
+	char tab2[69420];
 
 	if (ft_strtablen(tab) > 1)
 		ft_putstr_fd("pwd: too many arguments\n", 2);
-	getcwd(tab, 69420);
-	printf("%s\n", tab);
+	getcwd(tab2, 69420);
+	printf("%s\n", tab2);
 }

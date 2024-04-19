@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/16 20:46:21 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/19 19:02:21 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	get_env_index(char **env, char *name)
 	int	i;
 	int	len;
 
-	len = ft_strlen(name);
+	len = 0;
+	while (name[len] && name[len] != '=')
+		len++;
+	len += name[len] == '=';
 	i = 0;
 	while (env[i])
 	{
@@ -86,17 +89,18 @@ void	remove_var(char ***env, char *name)
 	index = get_env_index(*env, name);
 	if (index < 0)
 		return ;
-	new_env = ft_calloc(ft_strtablen(*env), sizeof(char **));
+	new_env = ft_calloc(ft_strtablen(*env) + 1, sizeof(char **));
 	if (!new_env)
+		return ;
 		//inserer exit qui free env;
-	free(*env[index]);
+	free((*env)[index]);
 	i = 0;
 	i2 = 0;
-	while (*env[i])
+	while ((*env)[i])
 	{
 		if (i != index)
 		{
-			new_env[i2] = *env[i];
+			new_env[i2] = (*env)[i];
 			i2++;
 		}
 		i++;
@@ -117,9 +121,9 @@ void	add_var(char ***env, char *env_var)
 		return ;
 		//inserer exit qui free env
 	i = 0;
-	while (*env[i])
+	while ((*env)[i])
 	{
-		new_env[i] = *env[i];
+		new_env[i] = (*env)[i];
 		i++;
 	}
 	free(*env);

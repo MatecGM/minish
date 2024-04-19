@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/16 18:41:55 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/19 19:06:47 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,40 @@ void	print_beautiful_header()
 	line = readline("");
 	while (line)
 		line = readline("");
-	printf("\033[0;37m\n\n\n\n");
+	printf("\033[0m\n\n\n\n");
 	dup2(fd_stdin, 0);
 	close(fd);
 }
 
-void	parse(char *str)
+void	parse(char *str, char ***env)
 {
 	int		i;
 	char	**splitted;
+	char	*tmp;
+	int		pid;
 
 	i = 0;
-	splitted = ft_tokenizer(str);
-	while (splitted && splitted[i])
+	splitted = ft_split_quote(str);
+	if (!strcmp(splitted[0], "export"))
+		ft_export(splitted, env);
+	else if (!strcmp(splitted[0], "echo"))
+		ft_echo(splitted);
+	else if (!strcmp(splitted[0], "cd"))
+		ft_cd(splitted);
+	else if (!strcmp(splitted[0], "pwd"))
+		ft_pwd(splitted);
+	else if (!strcmp(splitted[0], "unset"))
+		ft_unset(splitted, env);
+	else if (!strcmp(splitted[0], "env"))
+		ft_env(splitted, *env);
+	else
 	{
-		printf("-%s-\n", splitted[i]);
-		i++;
+		tmp = ft_strjoin("/bin/", splitted[0]);
+		pid = fork();
+		if (!pid)
+			execve(tmp, splitted, *env);
+		waitpid(pid, NULL, 0);
+		free(tmp);
 	}
 }
 
@@ -57,6 +75,6 @@ int	main(int argc, char **argv, char **env)
 		str = readline("ඞ-> ");
 		if (str && str[0])
 			add_history(str);
-		parse(str);
+		parse(str, &new_env);
 	}
 }

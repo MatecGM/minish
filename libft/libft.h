@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:26:57 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/10 20:05:15 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:03:53 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strtablen(char **tab);
 char	*ft_vajoin(char *str, ...);
 void	ft_free_tab(char **tab);
+void	ft_swap_str(char **tab, int i1, int i2);
 
 #endif

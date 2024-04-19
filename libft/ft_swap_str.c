@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_2.c                                       :+:      :+:    :+:   */
+/*   ft_swap_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/19 18:51:18 by fparis           ###   ########.fr       */
+/*   Created: 2024/04/19 18:03:10 by fparis            #+#    #+#             */
+/*   Updated: 2024/04/19 18:03:58 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_unset(char **tab, char ***env)
+void	ft_swap_str(char **tab, int i1, int i2)
 {
-	int	i;
+	char	*tmp;
 
-	if (!tab || !tab[0])
+	if (i1 == i2)
 		return ;
-	i = 1;
-	while (tab[i])
-	{
-		remove_var(env, tab[i]);
-		i++;
-	}
-}
-
-void	ft_env(char **tab, char **env)
-{
-	int	i;
-
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+	tmp = tab[i1];
+	tab[i1] = tab[i2];
+	tab[i2] = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/16 20:34:11 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:48:32 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,14 @@ int		get_env_index(char **env, char *name);
 char	**dup_env_tab(char **old_env);
 char	*get_env_value(char **env_var, char *name);
 void	print_error(char *str1, char *str2, char *str3);
+void	remove_var(char ***env, char *name);
+void	add_var(char ***env, char *env_var);
+void	print_error(char *str1, char *str2, char *str3);
+void	ft_echo(char **tab);
+void	ft_cd(char **tab);
+void	ft_pwd(char **tab);
+void	ft_unset(char **tab, char ***env);
+void	ft_env(char **tab, char **env);
+void	ft_export(char **tab, char ***env);
 
 #endif
