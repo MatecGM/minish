@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/19 19:06:47 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/24 03:49:02 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	parse(char *str, char ***env)
 		tmp = ft_strjoin("/bin/", splitted[0]);
 		pid = fork();
 		if (!pid)
+		{
 			execve(tmp, splitted, *env);
+			exit (0);
+		}
 		waitpid(pid, NULL, 0);
 		free(tmp);
 	}
@@ -67,14 +70,23 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 	char	**new_env;
 
-	//mettre la variable d'env SHLVL en + 1
+	//mettre la variable d'env SHLVL en + 1 + CREER PWD SI EXISTE PAS
 	new_env = dup_env_tab(env);
 	print_beautiful_header();
+	init_signal_handler();
+	str = NULL;
 	while (1)
 	{
+		interactive_mode(TRUE, 1);
 		str = readline("ඞ-> ");
 		if (str && str[0])
+		{
 			add_history(str);
-		parse(str, &new_env);
+			interactive_mode(TRUE, 0);
+			parse(str, &new_env);
+		}
+		else if (!str)
+			break ;
 	}
+	printf("\ncfini\n");
 }

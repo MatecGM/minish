@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/19 17:48:15 by fparis           ###   ########.fr        #
+#    Updated: 2024/04/23 21:16:31 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = main.c\
 		export.c\
 		builtins.c\
 		builtins_2.c\
+		signal_handler.c\
 
 LIBFT = libft/libft.a
 
