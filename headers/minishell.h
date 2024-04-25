@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/24 03:48:00 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:29:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_pwd(char **tab);
 void	ft_unset(char **tab, char ***env);
 void	ft_env(char **tab, char **env);
 void	ft_export(char **tab, char ***env);
-void	init_signal_handler();
+int		init_signal_handler();
 int		get_current_signal();
 void	check_signal();
 int		interactive_mode(t_bool to_change, int new_value);

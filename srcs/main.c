@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/24 03:49:02 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/25 19:27:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	print_beautiful_header()
 
 	printf ("\033c\033[0;35m");
 	fd = open("beautiful header", O_RDONLY);
-	fd_stdin = dup(0);
-	dup2(fd, 0);
-	line = readline("");
+	line = get_next_line(fd);
 	while (line)
-		line = readline("");
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
 	printf("\033[0m\n\n\n\n");
-	dup2(fd_stdin, 0);
 	close(fd);
 }
 
@@ -71,9 +72,10 @@ int	main(int argc, char **argv, char **env)
 	char	**new_env;
 
 	//mettre la variable d'env SHLVL en + 1 + CREER PWD SI EXISTE PAS
+	if (init_signal_handler())
+		exit(1);
 	new_env = dup_env_tab(env);
 	print_beautiful_header();
-	init_signal_handler();
 	str = NULL;
 	while (1)
 	{
