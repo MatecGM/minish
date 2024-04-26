@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/24 18:29:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/26 20:48:19 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <termios.h>
 
 typedef enum	s_type
 {
@@ -77,7 +78,6 @@ void	ft_env(char **tab, char **env);
 void	ft_export(char **tab, char ***env);
 int		init_signal_handler();
 int		get_current_signal();
-void	check_signal();
 int		interactive_mode(t_bool to_change, int new_value);
 
 #endif

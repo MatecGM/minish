@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/25 19:27:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/04/26 22:31:41 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ void	print_beautiful_header()
 
 void	parse(char *str, char ***env)
 {
-	int		i;
+	int		exit_status;
 	char	**splitted;
 	char	*tmp;
 	int		pid;
 
-	i = 0;
 	splitted = ft_split_quote(str);
 	if (!strcmp(splitted[0], "export"))
 		ft_export(splitted, env);
@@ -58,11 +57,14 @@ void	parse(char *str, char ***env)
 		pid = fork();
 		if (!pid)
 		{
+			signal(SIGQUIT, SIG_DFL);
 			execve(tmp, splitted, *env);
 			exit (0);
 		}
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &exit_status, 0);
 		free(tmp);
+		if (WIFSIGNALED(exit_status) && WTERMSIG(exit_status) == SIGQUIT)
+			print_error("Quit (core dumped)", NULL, NULL);
 	}
 }
 
@@ -90,5 +92,5 @@ int	main(int argc, char **argv, char **env)
 		else if (!str)
 			break ;
 	}
-	printf("\ncfini\n");
+	printf("exit\n");
 }
