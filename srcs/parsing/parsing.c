@@ -6,53 +6,70 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/04/17 19:07:16 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/02 18:18:07 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_type	typage(const char *elem)
+t_type typage(char *elem)
 {
-	if (strcmp(elem, "|"))
-		return (tpipe);
-	else if (strcmp(elem, "<"))
-		return (tinfile);
-	else if (strcmp(elem, "<<"))
+	if (!ft_strcmp(elem, "<<"))
 		return (theredoc);
-	else if (strcmp(elem, ">"))
-		return (toutfile);
-	else if (strcmp(elem, ">>"))
+	else if (!ft_strcmp(elem, ">>"))
 		return (tappend);
-	else
-		return (tcommand);
+	else if (!ft_strcmp(elem, "<"))
+		return (tinfile);
+	else if (!ft_strcmp(elem, ">"))
+		return (toutfile);
+	return (tnull);
 }
 
-void	inpipe(char **ptr)
+void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype)
 {
-	while(*ptr && typage(*ptr) != tpipe)
+	
+}
+
+void	inpipe(t_divpipe *cpipe, char **toked, int i)
+{
+	t_type		ltype;
+	t_type		ctype;
+	char		*cmd;
+	
+	ltype = tnull;
+	while (strcmp(toked[i], "|"))
 	{
-		if (**ptr == '<' || **ptr == '>')
-			blablaredirection();
-		
-		ptr ++;
+		ctype = typage(toked[i]);
+		if (ctype == tnull)
+		{
+			if (ltype == tnull)
+				cmd = toked[i];
+			else
+				redirect_filler(cpipe, toked[i], ltype);
+		}
+		ltype = ctype;
+		i ++;
 	}
 }
 
-char	**parsing(char *str)
+t_divpipe	*ft_parsing(char *input)
 {
-	char	**elem;
-	char	**ptr;
-
-	elem = ft_tokenizer(str);
-	if (!elem)
+	char		**toked;
+	t_divpipe	*divpipe;
+	t_divpipe	*cpipe;
+	int			i;
+	
+	divpipe = NULL;
+	toked = ft_tokenizer(input);
+	if (!toked)
 		return (NULL);
-	ptr = elem;
-	while (*ptr)
+	i = 0;
+	while (toked[i])
 	{
-		inpipe(ptr);
-		if (*ptr)
-			ptr++;
+		cpipe = ft_pipenew;
+		ft_pipeadd_back(&divpipe, cpipe);
+		inpipe(cpipe, toked, i);
+		if (toked[i])
+			i ++;
 	}
-	free(str);
 }

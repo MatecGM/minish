@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/26 20:48:19 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/02 18:14:15 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # include <signal.h>
 # include <termios.h>
 
-typedef enum	s_type
+typedef enum	e_type
 {
-	tfirst,
+	tnull = 0,
 	tpipe,
 	theredoc,
 	tinfile,
@@ -79,5 +79,9 @@ void	ft_export(char **tab, char ***env);
 int		init_signal_handler();
 int		get_current_signal();
 int		interactive_mode(t_bool to_change, int new_value);
+
+
+t_divpipe	*ft_pipenew(void);
+void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new)
 
 #endif
