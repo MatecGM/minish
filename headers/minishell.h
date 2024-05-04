@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/02 18:14:15 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/04 04:37:00 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -60,28 +60,32 @@ typedef struct	s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
-char	**ft_split_quote(char *str);
-void	ft_envdelone(t_env *env, void (*del)(void *));
-char	**ft_tokenizer(char *str);
-int		get_env_index(char **env, char *name);
-char	**dup_env_tab(char **old_env);
-char	*get_env_value(char **env_var, char *name);
-void	print_error(char *str1, char *str2, char *str3);
-void	remove_var(char ***env, char *name);
-void	add_var(char ***env, char *env_var);
-void	print_error(char *str1, char *str2, char *str3);
-void	ft_echo(char **tab);
-void	ft_cd(char **tab);
-void	ft_pwd(char **tab);
-void	ft_unset(char **tab, char ***env);
-void	ft_env(char **tab, char **env);
-void	ft_export(char **tab, char ***env);
-int		init_signal_handler();
-int		get_current_signal();
-int		interactive_mode(t_bool to_change, int new_value);
+// void	ft_envdelone(t_env *env, void (*del)(void *));
+// int		get_env_index(char **env, char *name);
+// char	**dup_env_tab(char **old_env);
+// char	*get_env_value(char **env_var, char *name);
+// void	print_error(char *str1, char *str2, char *str3);
+// void	remove_var(char ***env, char *name);
+// void	add_var(char ***env, char *env_var);
+// void	print_error(char *str1, char *str2, char *str3);
+// void	ft_echo(char **tab);
+// void	ft_cd(char **tab);
+// void	ft_pwd(char **tab);
+// void	ft_unset(char **tab, char ***env);
+// void	ft_env(char **tab, char **env);
+// void	ft_export(char **tab, char ***env);
+// int		init_signal_handler();
+// int		get_current_signal();
+// int		interactive_mode(t_bool to_change, int new_value);
 
+
+t_divpipe	*ft_parsing(char *input);
+char		**ft_split_quote(char *str);
+char		**ft_tokenizer(char *str);
 
 t_divpipe	*ft_pipenew(void);
-void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new)
+void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new);
+t_redirect	*ft_rednew(t_type type, char *arg);
+void		ft_redadd_back(t_redirect **red, t_redirect *new);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
+#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/04/23 21:16:31 by fparis           ###   ########.fr        #
+#    Updated: 2024/05/04 04:43:48 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,19 @@ OBJ_DIR = obj
 
 SRCS = main.c\
 		parsing/ft_split_quote.c\
-		env_struct/ft_envadd_front.c\
+		parsing/ft_tokenizer.c\
+		parsing/parsing.c\
+		divpipe/ft_pipeadd_back.c\
+		divpipe/ft_pipenew.c\
+		redirect/ft_redadd_back.c\
+		redirect/ft_rednew.c\
+#		env_struct/ft_envadd_front.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envclear.c\
 		env_struct/ft_envdelone.c\
 		env_struct/ft_envlast.c\
 		env_struct/ft_envnew.c\
 		env_struct/ft_envsize.c\
-		parsing/ft_tokenizer.c\
 		env.c\
 		export.c\
 		builtins.c\
@@ -41,8 +46,9 @@ OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $^ -o $(NAME) $(LIBFT) -I $(HEADER) -lreadline
-	 @echo "$(NAME) compilation successful !"
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(LIBFT) -I $(HEADER) 
+#-lreadline
+	@echo "$(NAME) compilation successful !"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
