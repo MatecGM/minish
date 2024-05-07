@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:30:55 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/04 03:41:28 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/07 16:14:36 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	ft_quote_len(char *str)
 	quote = FALSE;
 	single = FALSE;
 	len = 0;
+	while (*str == ' ')
+		str ++;
 	while (*str && !(*str == ' ' && !quote))
 	{
 		if (*str == '\'' && !quote)
@@ -84,6 +86,8 @@ char	*ft_word_filler(char *src, char *dst)
 	quote = FALSE;
 	single = FALSE;
 	i = 0;
+	while (*src == ' ')
+		src ++;
 	while (dst && *src && !(*src == ' ' && !quote))
 	{
 		if (*src == '\'' && !quote)

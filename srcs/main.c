@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/04 05:27:01 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/07 17:20:54 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv, char **env)
 	divpipe = ft_parsing(argv[1]);
 	while(divpipe)
 	{
+		ft_printf("%x\n", divpipe);
 		i = 0;
 		ft_printf("cmd = ");
 		while (divpipe->cmd[i])

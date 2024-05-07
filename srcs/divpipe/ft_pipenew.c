@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:08:01 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/04 04:41:34 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/07 17:43:56 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ t_divpipe	*ft_pipenew(void)
 	l = malloc(sizeof(t_divpipe));
 	if (l == NULL)
 		return (NULL);
+		l->next = NULL;
 	return (l);
 }
