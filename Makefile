@@ -6,7 +6,7 @@
 #    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/04 04:43:48 by mbico            ###   ########.fr        #
+#    Updated: 2024/05/11 17:16:24 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,12 @@ SRCS = main.c\
 		parsing/ft_split_quote.c\
 		parsing/ft_tokenizer.c\
 		parsing/parsing.c\
+		parsing/ft_quote_first_arg.c\
 		divpipe/ft_pipeadd_back.c\
 		divpipe/ft_pipenew.c\
 		redirect/ft_redadd_back.c\
 		redirect/ft_rednew.c\
-#		env_struct/ft_envadd_front.c\
+		env_struct/ft_envadd_front.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envclear.c\
 		env_struct/ft_envdelone.c\
@@ -46,8 +47,7 @@ OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $(NAME) $(LIBFT) -I $(HEADER) 
-#-lreadline
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(LIBFT) -I $(HEADER) -lreadline
 	@echo "$(NAME) compilation successful !"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/07 17:44:23 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/11 17:16:27 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 	char		*tmp;
 
 	split = ft_split_quote(arg);
-	//free(split[0]);
 	new = ft_rednew(ltype, split[0]);
+	new->quote = ft_quote_first_arg(arg);
 	ft_redadd_back(&(cpipe->redirect), new);
 	i = 1;
 	while(split[i])
