@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/11 18:22:21 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/19 16:06:22 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef enum	e_type
 	tinfile,
 	toutfile,
 	tappend,
-	tcommand,
 }	t_type;
 
 typedef enum	e_quote
@@ -91,6 +90,7 @@ t_divpipe	*ft_parsing(char *input);
 char		**ft_split_quote(char *str);
 char		**ft_tokenizer(char *str);
 t_bool		ft_quote_first_arg(char *str);
+t_type 		typage(char *elem);
 
 t_divpipe	*ft_pipenew(void);
 void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new);
