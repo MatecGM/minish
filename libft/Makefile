@@ -64,7 +64,8 @@ SRCS = ft_bzero.c \
 		ft_vajoin.c\
 		ft_free_tab.c\
 		ft_strtablen.c\
-		ft_swap_str.c
+		ft_swap_str.c\
+		ft_strcat.c\
 
 OBJS = ${SRCS:.c=.o}
 

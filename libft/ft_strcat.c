@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 10:27:05 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/20 22:11:24 by mbico            ###   ########.fr       */
+/*   Created: 2024/05/20 21:29:04 by mbico             #+#    #+#             */
+/*   Updated: 2024/05/20 22:15:34 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strcat(char *dst, const char *src)
 {
-	size_t	len;
-
-	len = 0;
-	while (s && *s != '\0')
+	int	i;
+	int	j;
+	
+	if (!src)
+		return (dst);
+	i = 0;
+	j = 0;
+	while(dst[i])
+		i ++;
+	while(src[j])
 	{
-		len ++;
-		s ++;
+		dst[i] = src[j];
+		i ++;
+		j ++;
 	}
-	return (len);
+	return (dst);
 }

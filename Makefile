@@ -6,7 +6,7 @@
 #    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/11 17:16:24 by mbico            ###   ########.fr        #
+#    Updated: 2024/05/20 20:14:16 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = main.c\
 		parsing/ft_tokenizer.c\
 		parsing/parsing.c\
 		parsing/ft_quote_first_arg.c\
+		parsing/env_var_extend.c\
 		divpipe/ft_pipeadd_back.c\
 		divpipe/ft_pipenew.c\
 		redirect/ft_redadd_back.c\

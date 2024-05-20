@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/19 16:06:22 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/20 21:42:25 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ int		get_current_signal();
 int		interactive_mode(t_bool to_change, int new_value);
 
 
-t_divpipe	*ft_parsing(char *input);
+t_divpipe	*ft_parsing(char *input, char **env);
 char		**ft_split_quote(char *str);
 char		**ft_tokenizer(char *str);
 t_bool		ft_quote_first_arg(char *str);
-t_type 		typage(char *elem);
+char		*extender(char *str, char **env);
 
 t_divpipe	*ft_pipenew(void);
 void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new);

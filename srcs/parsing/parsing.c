@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/11 17:16:27 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/20 21:42:07 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 
 }
 
-int	inpipe(t_divpipe *cpipe, char **toked, int i)
+int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
 {
 	t_type		ltype;
 	t_type		ctype;
@@ -68,7 +68,10 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i)
 		if (ctype == tnull)
 		{
 			if (ltype == tnull)
+			{
+				toked[i] = extender(toked[i], env);
 				cmd = toked[i];
+			}
 			else
 				redirect_filler(cpipe, toked[i], ltype, &cmd);
 		}
@@ -79,7 +82,7 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i)
 	return (i);
 }
 
-t_divpipe	*ft_parsing(char *input)
+t_divpipe	*ft_parsing(char *input, char **env)
 {
 	char		**toked;
 	t_divpipe	*divpipe;
@@ -96,7 +99,7 @@ t_divpipe	*ft_parsing(char *input)
 		cpipe = ft_pipenew();
 		cpipe->redirect = NULL;
 		ft_pipeadd_back(&divpipe, cpipe);
-		i = inpipe(cpipe, toked, i);
+		i = inpipe(cpipe, toked, i, env);
 		if (toked[i])
 			i ++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/19 19:02:21 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:07:17 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_env_index(char **env, char *name)
 	int	len;
 
 	len = 0;
-	while (name[len] && name[len] != '=')
+	while (name[len] && name[len] != '=' && name[len] != ' ')
 		len++;
 	len += name[len] == '=';
 	i = 0;

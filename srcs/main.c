@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/11 17:17:13 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/20 20:11:40 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		interactive_mode(TRUE, 1);
-		str = readline("ඞ-> ");
+		str = readline("\U00000D9E-> ");
 		if (str && str[0])
 		{
 			add_history(str);
 			interactive_mode(TRUE, 0);
-			divpipe = ft_parsing(str);
+			divpipe = ft_parsing(str, new_env);
 			
 			ft_printf("\n===================\n");
 			while(divpipe)

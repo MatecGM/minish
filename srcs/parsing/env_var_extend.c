@@ -6,21 +6,65 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/19 16:07:14 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/20 22:15:53 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**extender(char **toked)
+static int	ft_strlen_extend(char *str, char **env)	
 {
-	t_type	ltype;
+	int		i;
+	char	*value;
+	int		len;
 
-	ltype = tnull;
-	while (*toked)
+	i = 0;
+	len = 0;
+	while (str[i])
 	{
-		ltype = typage(*toked);
-		free(*toked);
-		toked ++;
+		if (str[i] == '$')
+		{
+			value = get_env_value(env, str + i + 1);
+			len += ft_strlen(value);
+			while(str[i] && str[i] != ' ')
+				i ++;
+		}
+		len ++;
+		i ++;	
 	}
+	return (len);
+}
+
+char	*extender(char *str, char **env)
+{
+	int		i;
+	int		j;
+	char	*value;
+	char	*new;
+
+	new = ft_calloc(ft_strlen_extend(str, env), sizeof(char));
+	if (!new)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			value = get_env_value(env, str + i + 1);
+			ft_printf("test\n");
+			new = ft_strcat(new, value);
+			j += ft_strlen(value);
+			free(value);
+			while(str[i] && str[i] != ' ')
+				i ++;
+		}
+		else
+		{
+			new[j] = str[i];
+			j ++;
+		}
+		i ++;	
+	}
+	return (new);
 }
