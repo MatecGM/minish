@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/20 22:15:53 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/22 13:45:32 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ static int	ft_strlen_extend(char *str, char **env)
 			len += ft_strlen(value);
 			while(str[i] && str[i] != ' ')
 				i ++;
+			free(value);
 		}
-		len ++;
-		i ++;	
+		else
+		{
+			len ++;
+			i ++;	
+		}
 	}
 	return (len);
 }
@@ -52,8 +56,8 @@ char	*extender(char *str, char **env)
 		if (str[i] == '$')
 		{
 			value = get_env_value(env, str + i + 1);
-			ft_printf("test\n");
-			new = ft_strcat(new, value);
+			if (value)
+				new = ft_strcat(new, value);
 			j += ft_strlen(value);
 			free(value);
 			while(str[i] && str[i] != ' ')
@@ -63,8 +67,8 @@ char	*extender(char *str, char **env)
 		{
 			new[j] = str[i];
 			j ++;
+			i ++;	
 		}
-		i ++;	
 	}
 	return (new);
 }
