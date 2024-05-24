@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/20 21:42:25 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/24 22:04:51 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,9 @@ t_divpipe	*ft_pipenew(void);
 void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new);
 t_redirect	*ft_rednew(t_type type, char *arg);
 void		ft_redadd_back(t_redirect **red, t_redirect *new);
+
+char		*put_paths(t_divpipe *divpipe, char **env);
+t_divpipe	*executer(t_divpipe	*divpipe, char ***env);
+int			is_builtin(char	*cmd);
 
 #endif

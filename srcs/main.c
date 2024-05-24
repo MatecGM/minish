@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/20 20:11:40 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/24 21:39:55 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,26 +90,39 @@ int	main(int argc, char **argv, char **env)
 			add_history(str);
 			interactive_mode(TRUE, 0);
 			divpipe = ft_parsing(str, new_env);
-			
-			ft_printf("\n===================\n");
-			while(divpipe)
+
+
+			if (!put_paths(divpipe, new_env))
+				exit(1); //faire exit free etou
+			t_divpipe	*tmp_pipe = divpipe;
+			while (tmp_pipe)
 			{
-				i = 0;
-				ft_printf("cmd = ");
-				while (divpipe->cmd[i])
-				{
-					ft_printf("%s ", divpipe->cmd[i]);
-					i ++;
-				}
-				ft_printf("\nredirection :\n");
-				while (divpipe->redirect)
-				{
-					ft_printf("type = %d, arg = %s, quote = %d\n", divpipe->redirect->type, divpipe->redirect->arg, divpipe->redirect->quote);
-					divpipe->redirect = divpipe->redirect->next;
-				}
-				divpipe = divpipe->next;
-				ft_printf("===================\n");
+				//-----faire les trucs de redirection------
+				executer(tmp_pipe, &new_env);
+				tmp_pipe = tmp_pipe->next;
 			}
+			
+
+
+			// ft_printf("\n===================\n");
+			// while(divpipe)
+			// {
+			// 	i = 0;
+			// 	ft_printf("cmd = ");
+			// 	while (divpipe->cmd[i])
+			// 	{
+			// 		ft_printf("%s ", divpipe->cmd[i]);
+			// 		i ++;
+			// 	}
+			// 	ft_printf("\nredirection :\n");
+			// 	while (divpipe->redirect)
+			// 	{
+			// 		ft_printf("type = %d, arg = %s, quote = %d\n", divpipe->redirect->type, divpipe->redirect->arg, divpipe->redirect->quote);
+			// 		divpipe->redirect = divpipe->redirect->next;
+			// 	}
+			// 	divpipe = divpipe->next;
+			// 	ft_printf("===================\n");
+			// }
 
 		}
 		else if (!str)

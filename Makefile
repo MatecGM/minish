@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
+#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/20 20:14:16 by mbico            ###   ########.fr        #
+#    Updated: 2024/05/24 21:35:57 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCS = main.c\
 		builtins.c\
 		builtins_2.c\
 		signal_handler.c\
+		get_paths.c\
+		executer.c\
 
 LIBFT = libft/libft.a
 
