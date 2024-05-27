@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
+#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/24 21:35:57 by fparis           ###   ########.fr        #
+#    Updated: 2024/05/25 16:52:26 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -g #-Wall -Wextra -Werror
 NAME = minishell
 HEADER = headers
 

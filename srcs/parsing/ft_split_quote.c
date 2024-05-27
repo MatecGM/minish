@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:30:55 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/11 17:31:51 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:58:20 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	**ft_split_quote(char *str)
 
 	cmd = NULL;
 	j = 0;
-	while (*str)
+	while (str && *str)
 	{
 		len = ft_quote_len(str);
 		cmd = ft_realloc(cmd);

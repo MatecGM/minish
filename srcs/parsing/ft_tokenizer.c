@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/04 05:13:18 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/25 17:42:56 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	split_tab(char *str, int i, int *i_tab, char **tab)
 	end = i;
 	while (str[end] && is_delimiter(str[end]) == type)
 		end++;
-	tab[*i_tab] = ft_calloc((end - i), sizeof(char));
+	tab[*i_tab] = ft_calloc((end - i) + 1, sizeof(char));
 	if (!tab[*i_tab])
 		return (-1);
 	j = 0;

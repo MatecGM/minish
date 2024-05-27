@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/22 13:42:38 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:55:40 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,15 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
 		if (ctype == tnull)
 		{
 			if (ltype == tnull)
-			{
-				toked[i] = extender(toked[i], env);
-				if (!toked[i])
-					toked[i] = ft_calloc(1, sizeof(char));
 				cmd = toked[i];
-			}
 			else
 				redirect_filler(cpipe, toked[i], ltype, &cmd);
 		}
 		ltype = ctype;
 		i ++;
 	}
+	if (ft_hasdollars(cmd))
+		cmd = extender(cmd, env);
 	cpipe->cmd = ft_split_quote(cmd);
 	return (i);
 }

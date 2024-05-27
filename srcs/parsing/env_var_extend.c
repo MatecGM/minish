@@ -6,11 +6,22 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/22 13:45:32 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:59:36 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_bool	ft_hasdollars(char *str)
+{
+	while(str && *str)
+	{
+		if (*str == '$')
+			return (TRUE);
+		str ++;
+	}
+	return (FALSE);
+}
 
 static int	ft_strlen_extend(char *str, char **env)	
 {
@@ -46,7 +57,7 @@ char	*extender(char *str, char **env)
 	char	*value;
 	char	*new;
 
-	new = ft_calloc(ft_strlen_extend(str, env), sizeof(char));
+	new = ft_calloc(ft_strlen_extend(str, env) + 1, sizeof(char));
 	if (!new)
 		return (NULL);
 	i = 0;
@@ -70,5 +81,6 @@ char	*extender(char *str, char **env)
 			i ++;	
 		}
 	}
+	free(str);
 	return (new);
 }

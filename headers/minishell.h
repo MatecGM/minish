@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/24 22:04:51 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:56:19 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char		**ft_split_quote(char *str);
 char		**ft_tokenizer(char *str);
 t_bool		ft_quote_first_arg(char *str);
 char		*extender(char *str, char **env);
+t_bool		ft_hasdollars(char *str);
 
 t_divpipe	*ft_pipenew(void);
 void		ft_pipeadd_back(t_divpipe **l, t_divpipe *new);
