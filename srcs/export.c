@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/19 18:48:05 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/30 22:35:11 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ char	*print_declare(char **env)
 		{
 			printf("declare -x ");
 			i2 = -1;
-			while (env[i][++i2] != '=')
+			while (env[i][++i2] && env[i][i2] != '=')
 				printf("%c", env[i][i2]);
-			printf("=\"");
-			while (env[i][++i2])
-				printf("%c", env[i][i2]);
-			printf("\"\n");
+			if (env[i][i2] == '=')
+			{
+				printf("=\"");
+				while (env[i][++i2])
+					printf("%c", env[i][i2]);
+				printf("\"");
+			}
+			printf("\n");
 		}
 		i++;
 	}
@@ -65,24 +69,22 @@ void	print_ascii_order(char **env)
 int	is_good_env(char *env_var)
 {
 	int	i;
-	int	has_equal;
 
-	has_equal = 0;
 	i = 0;
 	if (!ft_isalpha(env_var[0]) && env_var[0] != '_')
 		return (0);
-	while (env_var[i])
+	while (env_var[i] && env_var[i] != '=' && !(env_var[i] == '+' && env_var[i + 1] == '='))
 	{
-		if (env_var[i] == '=')
-			has_equal = 1;
 		if (!ft_isalpha(env_var[i]) && !ft_isdigit(env_var[i])
-			&& env_var[i] != '_' && env_var[i] != '=')
+			&& env_var[i] != '_')
 			return (0);
 		i++;
 	}
-	if (!has_equal)
-		return (-1);
-	return (1);
+	if (env_var[i] == '+')
+		return (2);
+	if (env_var[i] == '=')
+		return (1);
+	return (-1);
 }
 
 void	ft_export(char **tab, char ***env)
@@ -101,8 +103,10 @@ void	ft_export(char **tab, char ***env)
 		res = is_good_env(tab[i]);
 		if (res == 0)
 			print_error("minish: export: '", tab[i], "': not a valid identifier");
-		else if (res == 1)
+		else if (res == 1 || res == -1)
 			add_var(env, tab[i]);
+		else if (res == 2)
+			append_var(env, tab[i]);
 		i++;
 	}
 }

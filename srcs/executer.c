@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/24 22:07:14 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:46:47 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, char ***env)
 t_divpipe	*executer(t_divpipe	*divpipe, char ***env)
 {
 	int	child_pid;
+	int	status;
 
 	if (try_builtins(divpipe, env))
 		return (divpipe);
@@ -57,6 +58,8 @@ t_divpipe	*executer(t_divpipe	*divpipe, char ***env)
 		if (execve(divpipe->cmd_path, divpipe->cmd, *env) == -1)
 			return (NULL); //exit free
 	}
-	waitpid(child_pid, NULL, 0);
+	waitpid(child_pid, &status, 0);
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status); //l'exit status des trucs
 	return (divpipe);
 }

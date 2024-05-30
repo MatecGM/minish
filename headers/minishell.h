@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/27 17:56:19 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/30 22:35:01 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	ft_export(char **tab, char ***env);
 int		init_signal_handler();
 int		get_current_signal();
 int		interactive_mode(t_bool to_change, int new_value);
-
+int		is_good_env(char *env_var);
+void	append_var(char ***env, char *env_var);
 
 t_divpipe	*ft_parsing(char *input, char **env);
 char		**ft_split_quote(char *str);

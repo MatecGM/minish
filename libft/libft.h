@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:26:57 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/20 21:36:44 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/30 17:03:49 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 typedef enum e_bool
 {
 	ERROR = -1,
-	FALSE,
-	TRUE,
+	FALSE = 0,
+	TRUE = 1,
 }			t_bool;
 
 typedef struct s_list

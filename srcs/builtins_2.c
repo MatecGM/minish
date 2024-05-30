@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/19 18:51:18 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/30 22:20:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_env(char **tab, char **env)
 
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		if (is_good_env(env[i]) == 1)
+			printf("%s\n", env[i]);
 		i++;
 	}
 }

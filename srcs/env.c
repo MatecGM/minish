@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/20 22:07:17 by mbico            ###   ########.fr       */
+/*   Updated: 2024/05/30 22:38:14 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_env_index(char **env, char *name)
 	int	len;
 
 	len = 0;
-	while (name[len] && name[len] != '=' && name[len] != ' ')
+	while (name[len] && name[len] != '=' && name[len] != ' ' && name[len] != '+')
 		len++;
 	len += name[len] == '=';
 	i = 0;
@@ -91,8 +91,7 @@ void	remove_var(char ***env, char *name)
 		return ;
 	new_env = ft_calloc(ft_strtablen(*env) + 1, sizeof(char **));
 	if (!new_env)
-		return ;
-		//inserer exit qui free env;
+		return ; //inserer exit qui free env;
 	free((*env)[index]);
 	i = 0;
 	i2 = 0;
@@ -119,7 +118,7 @@ void	add_var(char ***env, char *env_var)
 	new_env = ft_calloc(ft_strtablen(*env) + 2, sizeof(char **));
 	if (!new_env)
 		return ;
-		//inserer exit qui free env
+		//inserer exit qui free env /// enft ce serait mieux de renvoyer NULL ou mettre code d'erreur dans t_minish
 	i = 0;
 	while ((*env)[i])
 	{

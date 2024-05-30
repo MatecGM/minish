@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/04/23 20:50:50 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:41:57 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,38 @@ void	print_error(char *str1, char *str2, char *str3)
 	ft_putstr_fd("\n", 2);
 }
 
+t_bool	check_echo_parameter(char *check)
+{
+	t_bool	res;
+	int		i;
+
+	i = 1;
+	res = FALSE;
+	if (check && !ft_strncmp(check, "-n", 2))
+	{
+		while (check[i] == 'n')
+			i++;
+		if (!check[i])
+			res = TRUE;
+	}
+	return (res);
+}
+
 void	ft_echo(char **tab)
 {
 	int		i;
 	t_bool	parameter;
 
-	parameter = FALSE;
 	i = 1;
-	if (tab[1] && !ft_strcmp(tab[1], "-n"))
-	{
-		parameter = TRUE;
+	parameter = check_echo_parameter(tab[1]);
+	if (parameter)
 		i = 2;
-	}
 	while (tab[i])
 	{
 		printf("%s", tab[i]);
 		i++;
+		if (tab[i])
+			printf(" ");
 	}
 	if (!parameter)
 		printf("\n");
