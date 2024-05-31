@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:14:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/24 22:05:19 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:31:02 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**get_paths(char **env)
 	splitted = get_splitted_paths(env);
 	if (!splitted)
 		return (NULL);
-	paths = ft_calloc(ft_strtablen(splitted), sizeof(char *));
+	paths = ft_calloc(ft_strtablen(splitted) + 1, sizeof(char *));
 	i = 0;
 	while (splitted[i])
 	{

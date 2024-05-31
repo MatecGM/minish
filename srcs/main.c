@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/30 22:34:16 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/31 20:03:58 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		else if (!str)
 			break ;
+		free(str);
 	}
 	printf("exit\n");
 	

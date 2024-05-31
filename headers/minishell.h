@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/30 22:35:01 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/31 20:17:18 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void		ft_redadd_back(t_redirect **red, t_redirect *new);
 char		*put_paths(t_divpipe *divpipe, char **env);
 t_divpipe	*executer(t_divpipe	*divpipe, char ***env);
 int			is_builtin(char	*cmd);
+char		*create_heredoc(char *heredoc_EOF);
 
 #endif

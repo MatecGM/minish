@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:26:57 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/30 17:03:49 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/31 18:13:19 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ char	*ft_vajoin(char *str, ...);
 void	ft_free_tab(char **tab);
 void	ft_swap_str(char **tab, int i1, int i2);
 char	*ft_strcat(char *dst, const char *src);
+void	ft_strprinttab(char **tab);
 
 #endif

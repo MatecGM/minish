@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/30 17:46:47 by fparis           ###   ########.fr       */
+/*   Updated: 2024/05/31 20:19:00 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, char ***env)
 		ft_unset(divpipe->cmd, env);
 	else if (!strcmp(divpipe->cmd[0], "env"))
 		ft_env(divpipe->cmd, *env);
+	else if (!strcmp(divpipe->cmd[0], "heredoc") && divpipe->cmd[1])///test
+		create_heredoc(divpipe->cmd[1]);//test
 	else
 		return (NULL);
 	return (divpipe);
@@ -55,11 +57,14 @@ t_divpipe	*executer(t_divpipe	*divpipe, char ***env)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (execve(divpipe->cmd_path, divpipe->cmd, *env) == -1)
 			return (NULL); //exit free
 	}
 	waitpid(child_pid, &status, 0);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status); //l'exit status des trucs
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+ 		print_error("Quit (core dumped)", NULL, NULL);
 	return (divpipe);
 }
