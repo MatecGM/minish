@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/27 17:55:40 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/01 15:48:39 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ t_type typage(char *elem)
 		return (tappend);
 	else if (!ft_strcmp(elem, "<"))
 		return (tinfile);
-	else if (!ft_strcmp(elem, ">"))
-		return (toutfile);
+	else if (!ft_strcmp(elem, ">"))session
 	return (tnull);
 }
 
