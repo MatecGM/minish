@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/31 20:19:00 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/04 22:30:31 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	is_builtin(char	*cmd)
 	return (0);
 }
 
-t_divpipe	*try_builtins(t_divpipe	*divpipe, char ***env)
+t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
 {
 	if (!strcmp(divpipe->cmd[0], "export"))
-		ft_export(divpipe->cmd, env);
+		ft_export(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "echo"))
 		ft_echo(divpipe->cmd);
 	else if (!strcmp(divpipe->cmd[0], "cd"))
@@ -32,9 +32,9 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, char ***env)
 	else if (!strcmp(divpipe->cmd[0], "pwd"))
 		ft_pwd(divpipe->cmd);
 	else if (!strcmp(divpipe->cmd[0], "unset"))
-		ft_unset(divpipe->cmd, env);
+		ft_unset(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "env"))
-		ft_env(divpipe->cmd, *env);
+		ft_env(divpipe->cmd, minish->env);
 	else if (!strcmp(divpipe->cmd[0], "heredoc") && divpipe->cmd[1])///test
 		create_heredoc(divpipe->cmd[1]);//test
 	else
@@ -42,12 +42,24 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, char ***env)
 	return (divpipe);
 }
 
-t_divpipe	*executer(t_divpipe	*divpipe, char ***env)
+void	exec_fork(t_divpipe	*divpipe, t_minish *minish)
+{
+	signal(SIGQUIT, SIG_DFL);
+	if (!strcmp(divpipe->cmd[0], "exit"))
+		ft_exit(divpipe->cmd, minish);
+	else if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
+	{
+		print_error("minish: execve error", NULL, NULL);
+		exit_free(minish, 1);
+	}
+}
+
+t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish)
 {
 	int	child_pid;
 	int	status;
 
-	if (try_builtins(divpipe, env))
+	if (try_builtins(divpipe, minish))
 		return (divpipe);
 	if (!divpipe->cmd_path)
 	{
@@ -56,14 +68,10 @@ t_divpipe	*executer(t_divpipe	*divpipe, char ***env)
 	}
 	child_pid = fork();
 	if (child_pid == 0)
-	{
-		signal(SIGQUIT, SIG_DFL);
-		if (execve(divpipe->cmd_path, divpipe->cmd, *env) == -1)
-			return (NULL); //exit free
-	}
+		exec_fork(divpipe, minish);
 	waitpid(child_pid, &status, 0);
 	if (WIFEXITED(status))
-		status = WEXITSTATUS(status); //l'exit status des trucs
+		minish->exit_status = WEXITSTATUS(status);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
  		print_error("Quit (core dumped)", NULL, NULL);
 	return (divpipe);

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipenew.c                                       :+:      :+:    :+:   */
+/*   free_minish.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:08:01 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/04 19:28:08 by fparis           ###   ########.fr       */
+/*   Created: 2024/06/04 18:47:22 by fparis            #+#    #+#             */
+/*   Updated: 2024/06/04 22:32:17 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_divpipe	*ft_pipenew(void)
+void	free_minish(t_minish *minish)
 {
-	t_divpipe	*l;
+	if (!minish)
+		return ;
+	if (minish->env)
+		ft_free_tab(minish->env);
+	minish->env = NULL;
+	if (minish->divpipe)
+		ft_free_pipe(minish->divpipe);
+	minish->divpipe = NULL;
+}
 
-	l = malloc(sizeof(t_divpipe));
-	if (l == NULL)
-		return (NULL);
-	l->next = NULL;
-	l->redirect = NULL;
-	l->cmd = NULL;
-	l->cmd_path = NULL;
-	return (l);
+void	exit_free(t_minish *minish, int exit_code)
+{
+	free_minish(minish);
+	exit(exit_code);
 }

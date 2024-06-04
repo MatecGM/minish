@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/31 20:14:38 by fparis           ###   ########.fr        #
+#    Updated: 2024/06/04 22:31:41 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ SRCS = main.c\
 		executer.c\
 		export_2.c\
 		heredoc.c\
+		divpipe/ft_freepipe.c\
+		redirect/ft_freered.c\
+		free_minish.c
 
 LIBFT = libft/libft.a
 

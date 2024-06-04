@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/01 15:48:39 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/04 23:07:06 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_type typage(char *elem)
 		return (tappend);
 	else if (!ft_strcmp(elem, "<"))
 		return (tinfile);
-	else if (!ft_strcmp(elem, ">"))session
+	else if (!ft_strcmp(elem, ">"))
+		return (toutfile);
 	return (tnull);
 }
 
@@ -32,7 +33,7 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 	char		*tmp;
 
 	split = ft_split_quote(arg);
-	new = ft_rednew(ltype, split[0]);
+	new = ft_rednew(ltype, split[0]); /////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa
 	new->quote = ft_quote_first_arg(arg);
 	ft_redadd_back(&(cpipe->redirect), new);
 	i = 1;
@@ -95,11 +96,14 @@ t_divpipe	*ft_parsing(char *input, char **env)
 	while (toked[i])
 	{
 		cpipe = ft_pipenew();
+		if (!cpipe)
+			break;
 		cpipe->redirect = NULL;
 		ft_pipeadd_back(&divpipe, cpipe);
 		i = inpipe(cpipe, toked, i, env);
 		if (toked[i])
 			i ++;
 	}
+	ft_free_tab(toked);
 	return (divpipe);
 }

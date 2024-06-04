@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:14:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/31 18:31:02 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/04 21:48:15 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ char	*put_paths(t_divpipe *divpipe, char **env)
 		return ("NO PATH");
 	paths = get_paths(env);
 	if (!paths)
-		return (NULL); //inserer exit qui free et tout pt
+		return (NULL);
 	tmp_pipe = divpipe;
 	while (tmp_pipe)
 	{
 		if (!try_path(tmp_pipe, paths))
 		{
 			ft_free_tab(paths);
-			return (NULL); //inserer exit qui free et tout pt
+			return (NULL);
 		}
 		tmp_pipe = tmp_pipe->next;
 	}

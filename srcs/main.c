@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:57:34 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/31 20:03:58 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/04 22:28:06 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,19 @@ void	print_beautiful_header()
 
 int	main(int argc, char **argv, char **env)
 {
-	t_divpipe	*divpipe;
+	//t_divpipe	*divpipe;
 	int			i;
-	char	**new_env;
+	t_minish	minish;
+	//char	**new_env;
 	char	*str;
 
 	//mettre la variable d'env SHLVL en + 1 + CREER PWD SI EXISTE PAS (que sur cd + creer OLDPWD)
+	ft_bzero(&minish, sizeof(t_minish));
 	if (init_signal_handler())
 		exit(1);
-	new_env = dup_env_tab(env);
+	minish.env = dup_env_tab(env);
+	if (!minish.env)
+		exit(1);
 	print_beautiful_header();
 	str = NULL;
 	while (1)
@@ -89,19 +93,22 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(str);
 			interactive_mode(TRUE, 0);
-			divpipe = ft_parsing(str, new_env);
+			minish.divpipe = ft_parsing(str, minish.env);
+			if (!minish.divpipe)
+				exit_free(&minish, 1);
 
-
-			if (!put_paths(divpipe, new_env))
-				exit(1); //faire exit free etou
-			t_divpipe	*tmp_pipe = divpipe;
+			if (!put_paths(minish.divpipe, minish.env))
+				exit_free(&minish, 1);
+			t_divpipe	*tmp_pipe = minish.divpipe;
 			while (tmp_pipe)
 			{
 				//-----faire les trucs de redirection------
-				executer(tmp_pipe, &new_env);
+				executer(tmp_pipe, &minish);
 				tmp_pipe = tmp_pipe->next;
 			}
-			
+			if (minish.divpipe)
+				ft_free_pipe(minish.divpipe);
+			minish.divpipe = NULL;
 
 
 			// ft_printf("\n===================\n");
@@ -129,7 +136,8 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		free(str);
 	}
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 2);
+	exit_free(&minish, 0);
 	
 
 

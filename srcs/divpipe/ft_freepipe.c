@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipenew.c                                       :+:      :+:    :+:   */
+/*   ft_freepipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:08:01 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/04 19:28:08 by fparis           ###   ########.fr       */
+/*   Created: 2024/06/04 18:51:35 by fparis            #+#    #+#             */
+/*   Updated: 2024/06/04 22:56:35 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_divpipe	*ft_pipenew(void)
+void	ft_free_pipe(t_divpipe *pipe)
 {
-	t_divpipe	*l;
-
-	l = malloc(sizeof(t_divpipe));
-	if (l == NULL)
-		return (NULL);
-	l->next = NULL;
-	l->redirect = NULL;
-	l->cmd = NULL;
-	l->cmd_path = NULL;
-	return (l);
+	if (!pipe)
+		return ;
+	if (pipe->cmd_path && pipe->cmd_path != pipe->cmd[0])
+		free(pipe->cmd_path);
+	if (pipe->next)
+		ft_free_pipe(pipe->next);
+	if (pipe->cmd)
+		ft_free_tab(pipe->cmd);
+	if (pipe->redirect)
+		ft_freered(pipe->redirect);
+	free(pipe);
 }

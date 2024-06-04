@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/30 22:38:14 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/04 23:25:54 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	**dup_env_tab(char **old_env)
 	int		i;
 
 	new_env = ft_calloc(ft_strtablen(old_env) + 1, sizeof(char *));
+	if (!new_env)
+		return (NULL);
 	i = 0;
 	while (old_env[i])
 	{
@@ -72,60 +74,59 @@ char	**dup_env_tab(char **old_env)
 		if (!new_env[i])
 		{
 			ft_free_tab(new_env);
-			//inserer exit ici
+			return (NULL);
 		}
 		i++;
 	}
 	return (new_env);
 }
 
-void	remove_var(char ***env, char *name)
+void	remove_var(t_minish *minish, char *name)
 {
 	int		index;
 	char	**new_env;
 	int		i;
 	int		i2;
 
-	index = get_env_index(*env, name);
+	index = get_env_index(minish->env, name);
 	if (index < 0)
 		return ;
-	new_env = ft_calloc(ft_strtablen(*env) + 1, sizeof(char **));
+	new_env = ft_calloc(ft_strtablen(minish->env) + 1, sizeof(char **));
 	if (!new_env)
-		return ; //inserer exit qui free env;
-	free((*env)[index]);
+		exit_free(minish, 1);
 	i = 0;
 	i2 = 0;
-	while ((*env)[i])
+	while ((minish->env)[i])
 	{
 		if (i != index)
 		{
-			new_env[i2] = (*env)[i];
+			new_env[i2] = (minish->env)[i];
 			i2++;
 		}
 		i++;
 	}
-	free(*env);
-	*env = new_env;
+	free((minish->env)[index]);
+	free(minish->env);
+	minish->env = new_env;
 }
 
-void	add_var(char ***env, char *env_var)
+void	add_var(t_minish *minish, char *env_var)
 {
 	int		i;
 	char	**new_env;
 
-	if (get_env_index(*env, env_var) >= 0)
-		remove_var(env, env_var); //bien check ce cas la parce que changement de tab inter fonction suspect
-	new_env = ft_calloc(ft_strtablen(*env) + 2, sizeof(char **));
+	if (get_env_index(minish->env, env_var) >= 0)
+		remove_var(minish, env_var); //bien check ce cas la parce que changement de tab inter fonction suspect
+	new_env = ft_calloc(ft_strtablen(minish->env) + 2, sizeof(char **));
 	if (!new_env)
-		return ;
-		//inserer exit qui free env /// enft ce serait mieux de renvoyer NULL ou mettre code d'erreur dans t_minish
+		exit_free(minish, 1);
 	i = 0;
-	while ((*env)[i])
+	while ((minish->env)[i])
 	{
-		new_env[i] = (*env)[i];
+		new_env[i] = (minish->env)[i];
 		i++;
 	}
-	free(*env);
+	free(minish->env);
 	new_env[i] = env_var;
-	*env = new_env;
+	minish->env = new_env;
 }

@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/30 22:35:11 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/04 22:21:28 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	print_ascii_order(char **env)
 	int		i_min;
 
 	env_dup = dup_env_tab(env);
+	if (!env_dup)
+		return ;
 	i = 0;
 	while (env_dup[i])
 	{
@@ -87,14 +89,14 @@ int	is_good_env(char *env_var)
 	return (-1);
 }
 
-void	ft_export(char **tab, char ***env)
+void	ft_export(char **tab, t_minish *minish)
 {
 	int	res;
 	int	i;
 
 	if (ft_strtablen(tab) == 1)
 	{
-		print_ascii_order(*env);
+		print_ascii_order(minish->env);
 		return ;
 	}
 	i = 1;
@@ -104,9 +106,9 @@ void	ft_export(char **tab, char ***env)
 		if (res == 0)
 			print_error("minish: export: '", tab[i], "': not a valid identifier");
 		else if (res == 1 || res == -1)
-			add_var(env, tab[i]);
+			add_var(minish, tab[i]);
 		else if (res == 2)
-			append_var(env, tab[i]);
+			append_var(minish, tab[i]);
 		i++;
 	}
 }
