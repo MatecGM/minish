@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/05 19:56:22 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:48:27 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 	char		*tmp;
 
 	split = ft_split_quote(arg);
-	new = ft_rednew(ltype, split[0]); /////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa
+	new = ft_rednew(ltype, split[0]); //a gerer
 	new->quote = ft_quote_first_arg(arg);
 	ft_redadd_back(&(cpipe->redirect), new);
 	i = 1;
@@ -68,7 +68,7 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
 		if (ctype == tnull)
 		{
 			if (ltype == tnull)
-				cmd = toked[i];
+				cmd = ft_strdup(toked[i]);
 			else
 				redirect_filler(cpipe, toked[i], ltype, &cmd);
 		}
@@ -78,6 +78,7 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
 	if (ft_hasdollars(cmd))
 		cmd = extender(cmd, env);
 	cpipe->cmd = ft_split_quote(cmd);
+	free(cmd);
 	return (i);
 }
 

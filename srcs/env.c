@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/04 23:25:54 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:51:38 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ int	get_env_index(char **env, char *name)
 	len = 0;
 	while (name[len] && name[len] != '=' && name[len] != ' ' && name[len] != '+')
 		len++;
-	len += name[len] == '=';
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], name, len))
+		if (!ft_strncmp(env[i], name, len) && get_name_len(env[i]) == len)
 			return (i);
 		i++;
 	}
@@ -127,6 +126,8 @@ void	add_var(t_minish *minish, char *env_var)
 		i++;
 	}
 	free(minish->env);
-	new_env[i] = env_var;
+	new_env[i] = ft_strdup(env_var);
 	minish->env = new_env;
+	if (!new_env[i])
+		exit_free(minish, 1);
 }

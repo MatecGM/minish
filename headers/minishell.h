@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 19:52:57 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 20:55:10 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		interactive_mode(t_bool to_change, int new_value);
 int		is_good_env(char *env_var);
 void	append_var(t_minish *minish, char *env_var);
 void	ft_exit(char **tab, t_minish *minish);
+int		get_name_len(char *env_var);
 
 t_divpipe	*ft_parsing(char *input, char **env);
 char		**ft_split_quote(char *str);

@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **env)
 			{
 				//-----faire les trucs de redirection------
 				ft_redirection(tmp_pipe->redirect);
-				executer(tmp_pipe, &new_env);
+				executer(tmp_pipe, &minish);
 				tmp_pipe = tmp_pipe->next;
 			}
 			if (minish.divpipe)
