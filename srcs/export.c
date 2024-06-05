@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/04 22:21:28 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:55:21 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*print_declare(char **env)
 {
-	int		i;
-	int		i2;
+	int	i2;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -75,7 +75,8 @@ int	is_good_env(char *env_var)
 	i = 0;
 	if (!ft_isalpha(env_var[0]) && env_var[0] != '_')
 		return (0);
-	while (env_var[i] && env_var[i] != '=' && !(env_var[i] == '+' && env_var[i + 1] == '='))
+	while (env_var[i] && env_var[i] != '=' && !(env_var[i] == '+' && env_var[i
+			+ 1] == '='))
 	{
 		if (!ft_isalpha(env_var[i]) && !ft_isdigit(env_var[i])
 			&& env_var[i] != '_')
@@ -104,7 +105,8 @@ void	ft_export(char **tab, t_minish *minish)
 	{
 		res = is_good_env(tab[i]);
 		if (res == 0)
-			print_error("minish: export: '", tab[i], "': not a valid identifier");
+			print_error("minish: export: '", tab[i],
+					"': not a valid identifier");
 		else if (res == 1 || res == -1)
 			add_var(minish, tab[i]);
 		else if (res == 2)

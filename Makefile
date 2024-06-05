@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/06/04 22:31:41 by fparis           ###   ########.fr        #
+#    Updated: 2024/06/05 19:53:27 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = main.c\
 		divpipe/ft_pipenew.c\
 		redirect/ft_redadd_back.c\
 		redirect/ft_rednew.c\
+		redirect/redirection.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envclear.c\

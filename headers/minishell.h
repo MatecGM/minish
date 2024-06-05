@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/04 22:18:48 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:52:57 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ typedef enum	e_type
 {
 	tnull = 0,
 	tpipe,
-	theredoc,
 	tinfile,
 	toutfile,
+	theredoc,
 	tappend,
 }	t_type;
 
@@ -111,6 +111,7 @@ char		*put_paths(t_divpipe *divpipe, char **env);
 t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish);
 int			is_builtin(char	*cmd);
 char		*create_heredoc(char *heredoc_EOF);
+void		ft_redirection(t_redirect *red);
 
 void	ft_freered(t_redirect *redirect);
 void	ft_free_pipe(t_divpipe *pipe);
