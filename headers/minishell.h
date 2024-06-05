@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/31 20:17:18 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/05 14:55:44 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ typedef enum	e_type
 {
 	tnull = 0,
 	tpipe,
-	theredoc,
 	tinfile,
 	toutfile,
+	theredoc,
 	tappend,
 }	t_type;
 
@@ -103,5 +103,6 @@ char		*put_paths(t_divpipe *divpipe, char **env);
 t_divpipe	*executer(t_divpipe	*divpipe, char ***env);
 int			is_builtin(char	*cmd);
 char		*create_heredoc(char *heredoc_EOF);
+void		ft_redirection(t_redirect *red);
 
 #endif

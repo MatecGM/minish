@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
+#    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/05/31 20:14:38 by fparis           ###   ########.fr        #
+#    Updated: 2024/06/05 14:55:06 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = main.c\
 		divpipe/ft_pipenew.c\
 		redirect/ft_redadd_back.c\
 		redirect/ft_rednew.c\
+		redirect/redirection.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envadd_front.c\
 		env_struct/ft_envclear.c\

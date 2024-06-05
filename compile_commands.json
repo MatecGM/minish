@@ -1,0 +1,352 @@
+[
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/main.c",
+   "-o",
+   "obj/main.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/main.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/parsing/ft_split_quote.c",
+   "-o",
+   "obj/parsing/ft_split_quote.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/parsing/ft_split_quote.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/parsing/ft_tokenizer.c",
+   "-o",
+   "obj/parsing/ft_tokenizer.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/parsing/ft_tokenizer.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/parsing/parsing.c",
+   "-o",
+   "obj/parsing/parsing.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/parsing/parsing.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/parsing/ft_quote_first_arg.c",
+   "-o",
+   "obj/parsing/ft_quote_first_arg.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/parsing/ft_quote_first_arg.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/parsing/env_var_extend.c",
+   "-o",
+   "obj/parsing/env_var_extend.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/parsing/env_var_extend.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/divpipe/ft_pipeadd_back.c",
+   "-o",
+   "obj/divpipe/ft_pipeadd_back.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/divpipe/ft_pipeadd_back.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/divpipe/ft_pipenew.c",
+   "-o",
+   "obj/divpipe/ft_pipenew.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/divpipe/ft_pipenew.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/redirect/ft_redadd_back.c",
+   "-o",
+   "obj/redirect/ft_redadd_back.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/redirect/ft_redadd_back.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/redirect/ft_rednew.c",
+   "-o",
+   "obj/redirect/ft_rednew.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/redirect/ft_rednew.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envadd_front.c",
+   "-o",
+   "obj/env_struct/ft_envadd_front.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envadd_front.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envclear.c",
+   "-o",
+   "obj/env_struct/ft_envclear.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envclear.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envdelone.c",
+   "-o",
+   "obj/env_struct/ft_envdelone.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envdelone.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envlast.c",
+   "-o",
+   "obj/env_struct/ft_envlast.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envlast.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envnew.c",
+   "-o",
+   "obj/env_struct/ft_envnew.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envnew.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env_struct/ft_envsize.c",
+   "-o",
+   "obj/env_struct/ft_envsize.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env_struct/ft_envsize.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/env.c",
+   "-o",
+   "obj/env.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/env.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/export.c",
+   "-o",
+   "obj/export.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/export.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/builtins.c",
+   "-o",
+   "obj/builtins.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/builtins.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/builtins_2.c",
+   "-o",
+   "obj/builtins_2.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/builtins_2.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/signal_handler.c",
+   "-o",
+   "obj/signal_handler.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/signal_handler.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/get_paths.c",
+   "-o",
+   "obj/get_paths.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/get_paths.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/executer.c",
+   "-o",
+   "obj/executer.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/executer.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/export_2.c",
+   "-o",
+   "obj/export_2.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/export_2.c"
+ },
+ {
+  "directory": "/nfs/homes/mbico/Desktop/minish",
+  "arguments": [
+   "cc",
+   "-g",
+   "-c",
+   "srcs/heredoc.c",
+   "-o",
+   "obj/heredoc.o",
+   "-I",
+   "headers"
+  ],
+  "file": "srcs/heredoc.c"
+ }
+]
