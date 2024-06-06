@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:14:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/04 21:48:15 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/06 21:35:05 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	*try_path(t_divpipe *divpipe, char **paths)
 
 	if (!divpipe->cmd || !divpipe->cmd[0])
 		return (NULL);
-	if (is_builtin(divpipe->cmd[0]))
+	if (access(divpipe->cmd_path, F_OK | X_OK) == 0
+		|| is_builtin(divpipe->cmd[0]))
 		return ("IS BUILTIN");
 	i = 0;
 	while (paths[i])

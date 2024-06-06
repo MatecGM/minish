@@ -73,15 +73,17 @@ int	main(int argc, char **argv, char **env)
 	int			i;
 	t_minish	minish;
 	//char	**new_env;
-	char	*str;
+	char		*str;
+	t_divpipe	*tmp_pipe;
 
-	//mettre la variable d'env SHLVL en + 1 + CREER PWD SI EXISTE PAS (que sur cd + creer OLDPWD)
 	ft_bzero(&minish, sizeof(t_minish));
 	if (init_signal_handler())
 		exit(1);
 	minish.env = dup_env_tab(env);
 	if (!minish.env)
 		exit(1);
+	update_shlvl(&minish);
+	update_pwd(&minish, "PWD=");
 	print_beautiful_header();
 	str = NULL;
 	while (1)
@@ -98,7 +100,9 @@ int	main(int argc, char **argv, char **env)
 
 			if (!put_paths(minish.divpipe, minish.env))
 				exit_free(&minish, 1);
-			t_divpipe	*tmp_pipe = minish.divpipe;
+			tmp_pipe = minish.divpipe;
+			minish.in_pipe = minish.divpipe->next != NULL;
+			update_underscore(&minish);
 			while (tmp_pipe)
 			{
 				//-----faire les trucs de redirection------

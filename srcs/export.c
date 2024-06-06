@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 19:55:21 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/06 22:14:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_export(char **tab, t_minish *minish)
 	int	res;
 	int	i;
 
+	minish->exit_status = 0;
 	if (ft_strtablen(tab) == 1)
 	{
 		print_ascii_order(minish->env);
@@ -105,11 +106,14 @@ void	ft_export(char **tab, t_minish *minish)
 	{
 		res = is_good_env(tab[i]);
 		if (res == 0)
+		{
 			print_error("minish: export: '", tab[i],
 					"': not a valid identifier");
-		else if (res == 1 || res == -1)
+			minish->exit_status = 1;
+		}
+		else if (!minish->in_pipe && (res == 1 || res == -1))
 			add_var(minish, tab[i]);
-		else if (res == 2)
+		else if (!minish->in_pipe && res == 2)
 			append_var(minish, tab[i]);
 		i++;
 	}

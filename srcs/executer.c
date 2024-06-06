@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 19:55:13 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/06 22:03:30 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
 	if (!strcmp(divpipe->cmd[0], "export"))
 		ft_export(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "echo"))
-		ft_echo(divpipe->cmd);
+		ft_echo(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "cd"))
-		ft_cd(divpipe->cmd);
+		ft_cd(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "pwd"))
-		ft_pwd(divpipe->cmd);
+		ft_pwd(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "unset"))
 		ft_unset(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "env"))
-		ft_env(divpipe->cmd, minish->env);
+		ft_env(divpipe->cmd, minish->env, minish);
+	else if (!strcmp(divpipe->cmd[0], "exit"))
+		ft_exit(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "heredoc") && divpipe->cmd[1])///test
 		create_heredoc(divpipe->cmd[1]);//test
 	else
@@ -45,11 +47,10 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
 void	exec_fork(t_divpipe	*divpipe, t_minish *minish)
 {
 	signal(SIGQUIT, SIG_DFL);
-	if (!strcmp(divpipe->cmd[0], "exit"))
-		ft_exit(divpipe->cmd, minish);
-	else if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
+	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 	{
-		print_error("minish: execve error", NULL, NULL);
+		perror("minish");
+		//print_error("minish: execve error", NULL, NULL);
 		exit_free(minish, 1);
 	}
 }
@@ -64,6 +65,7 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish)
 	if (!divpipe->cmd_path)
 	{
 		print_error(divpipe->cmd[0], ": command not found", NULL);
+		minish->exit_status = 127;
 		return (NULL);
 	}
 	child_pid = fork();

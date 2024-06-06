@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/06/05 22:16:24 by fparis           ###   ########.fr        #
+#    Updated: 2024/06/06 20:41:37 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS = main.c\
 		divpipe/ft_freepipe.c\
 		redirect/ft_freered.c\
 		free_minish.c\
+		update_var.c
 
 LIBFT = libft/libft.a
 

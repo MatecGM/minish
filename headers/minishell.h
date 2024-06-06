@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 20:55:10 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/06 21:38:15 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+# include <errno.h>
 
 typedef enum	e_type
 {
@@ -72,6 +73,7 @@ typedef struct	s_minish
 	char		**env;
 	t_divpipe	*divpipe;
 	int			exit_status;
+	int			in_pipe;
 }	t_minish;
 
 void	ft_envdelone(t_env *env, void (*del)(void *));
@@ -82,11 +84,11 @@ void	print_error(char *str1, char *str2, char *str3);
 void	remove_var(t_minish *minish, char *name);
 void	add_var(t_minish *minish, char *env_var);
 void	print_error(char *str1, char *str2, char *str3);
-void	ft_echo(char **tab);
-void	ft_cd(char **tab);
-void	ft_pwd(char **tab);
+void	ft_echo(char **tab, t_minish *minish);
+void	ft_cd(char **tab, t_minish *minish);
+void	ft_pwd(char **tab, t_minish *minish);
 void	ft_unset(char **tab, t_minish *minish);
-void	ft_env(char **tab, char **env);
+void	ft_env(char **tab, char **env, t_minish *minish);
 void	ft_export(char **tab, t_minish *minish);
 int		init_signal_handler();
 int		get_current_signal();
@@ -117,5 +119,9 @@ void		ft_redirection(t_redirect *red);
 void	ft_freered(t_redirect *redirect);
 void	ft_free_pipe(t_divpipe *pipe);
 void	exit_free(t_minish *minish, int exit_code);
+void	update_underscore(t_minish *minish);
+void	update_pwd(t_minish *minish, char *name);
+void	update_shlvl(t_minish *minish);
+void	cd_home(t_minish *minish);
 
 #endif
