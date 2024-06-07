@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/06 22:03:30 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/07 17:47:46 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	exec_fork(t_divpipe	*divpipe, t_minish *minish)
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 	{
 		perror("minish");
-		//print_error("minish: execve error", NULL, NULL);
 		exit_free(minish, 1);
 	}
 }

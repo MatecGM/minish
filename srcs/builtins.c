@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/06 22:10:57 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/07 19:37:51 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@ void	print_error(char *str1, char *str2, char *str3)
 	ft_putstr_fd("\n", 2);
 }
 
-t_bool	check_echo_parameter(char *check)
+int	check_echo_parameter(char **check)
 {
-	t_bool	res;
-	int		i;
+	int	res;
+	int	i;
 
-	i = 1;
-	res = FALSE;
-	if (check && !ft_strncmp(check, "-n", 2))
+	res = 1;
+	if (!check[res])
+		return (res);
+	while (check[res] && !ft_strncmp(check[res], "-n", 2))
 	{
-		while (check[i] == 'n')
+		i = 1;
+		while (check[res][i] == 'n')
 			i++;
-		if (!check[i])
-			res = TRUE;
+		if (!check[res][i])
+			res++;
+		else
+			return (res);
 	}
 	return (res);
 }
@@ -43,12 +47,10 @@ t_bool	check_echo_parameter(char *check)
 void	ft_echo(char **tab, t_minish *minish)
 {
 	int		i;
-	t_bool	parameter;
+	int		parameter;
 
-	i = 1;
-	parameter = check_echo_parameter(tab[1]);
-	if (parameter)
-		i = 2;
+	parameter = check_echo_parameter(tab);
+	i = parameter;
 	while (tab[i])
 	{
 		printf("%s", tab[i]);
@@ -56,7 +58,7 @@ void	ft_echo(char **tab, t_minish *minish)
 		if (tab[i])
 			printf(" ");
 	}
-	if (!parameter)
+	if (parameter == 1)
 		printf("\n");
 	minish->exit_status = 0;
 }
@@ -65,29 +67,15 @@ void	ft_cd(char **tab, t_minish *minish)
 {
 	if (minish->in_pipe)
 		return ;
-	if (ft_strtablen(tab) == 1)
-	{
-		cd_home(minish);
-		return ;
-	}
-	else if (ft_strtablen(tab) > 2)
-		print_error("cd: string not in pwd: ", tab[1], NULL);
-	else if (access(tab[1], F_OK) == 0)
-	{
-		if (access(tab[1], R_OK) == 0)
-		{
-			update_pwd(minish, "OLDPWD=");
-			chdir(tab[1]);
-			update_pwd(minish, "PWD=");
-			minish->exit_status = 0;
-			return ;
-		}
-		else
-			print_error("cd: permission denied: ", tab[1], NULL);
-	}
-	else
-		print_error("cd: no such file or directory: ", tab[1], NULL);
 	minish->exit_status = 1;
+	if (ft_strtablen(tab) == 1)
+		cd_home(minish);
+	else if (ft_strtablen(tab) > 2)
+		print_error("minish: cd: too many arguments", NULL, NULL);
+	else if (!ft_strcmp(tab[1], "-"))
+		cd_back(minish);
+	else
+		default_cd(tab, minish);
 }
 
 void	ft_pwd(char **tab, t_minish *minish)
@@ -102,8 +90,7 @@ void	ft_pwd(char **tab, t_minish *minish)
 	{
 		if (errno == ENOENT)
 		{
-			print_error("minish: The current working",
-				"directory has been unlinked", NULL);
+			print_error("minish: Stale file handle", NULL, NULL);
 			return ;
 		}
 		exit_free(minish, 1);

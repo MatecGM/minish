@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/06 21:38:15 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/07 18:56:08 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,7 @@ void	update_underscore(t_minish *minish);
 void	update_pwd(t_minish *minish, char *name);
 void	update_shlvl(t_minish *minish);
 void	cd_home(t_minish *minish);
+void	default_cd(char **tab, t_minish *minish);
+void	cd_back(t_minish *minish);
 
 #endif

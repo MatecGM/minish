@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 21:51:38 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/07 19:45:02 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,12 @@ void	add_var(t_minish *minish, char *env_var)
 	char	**new_env;
 
 	if (get_env_index(minish->env, env_var) >= 0)
+	{
+		if (get_name_len(env_var) == ft_strlen(env_var)
+			&& env_var[ft_strlen(env_var) - 1] != '=')
+			return ;
 		remove_var(minish, env_var); //bien check ce cas la parce que changement de tab inter fonction suspect
+	}
 	new_env = ft_calloc(ft_strtablen(minish->env) + 2, sizeof(char **));
 	if (!new_env)
 		exit_free(minish, 1);

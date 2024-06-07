@@ -82,9 +82,9 @@ int	main(int argc, char **argv, char **env)
 	minish.env = dup_env_tab(env);
 	if (!minish.env)
 		exit(1);
+	print_beautiful_header();
 	update_shlvl(&minish);
 	update_pwd(&minish, "PWD=");
-	print_beautiful_header();
 	str = NULL;
 	while (1)
 	{
