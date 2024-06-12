@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 18:56:08 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:32:13 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ t_redirect	*ft_rednew(t_type type, char *arg);
 void		ft_redadd_back(t_redirect **red, t_redirect *new);
 
 char		*put_paths(t_divpipe *divpipe, char **env);
-t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish);
+t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd);
 int			is_builtin(char	*cmd);
 char		*create_heredoc(char *heredoc_EOF);
-void		ft_redirection(t_redirect *red);
+void		ft_redirection(t_redirect *red, int *fd, int *pip);
 
 void	ft_freered(t_redirect *redirect);
 void	ft_free_pipe(t_divpipe *pipe);
@@ -126,4 +126,5 @@ void	cd_home(t_minish *minish);
 void	default_cd(char **tab, t_minish *minish);
 void	cd_back(t_minish *minish);
 
+void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish);
 #endif
