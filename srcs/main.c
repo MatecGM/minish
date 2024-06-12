@@ -106,7 +106,7 @@ int	main(int argc, char **argv, char **env)
 			while (tmp_pipe)
 			{
 				//-----faire les trucs de redirection------
-				ft_redirection(tmp_pipe->redirect);
+				//ft_redirection(tmp_pipe->redirect);
 				executer(tmp_pipe, &minish);
 				tmp_pipe = tmp_pipe->next;
 			}

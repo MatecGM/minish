@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 17:47:46 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:55:29 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
 		ft_env(divpipe->cmd, minish->env, minish);
 	else if (!strcmp(divpipe->cmd[0], "exit"))
 		ft_exit(divpipe->cmd, minish);
-	else if (!strcmp(divpipe->cmd[0], "heredoc") && divpipe->cmd[1])///test
-		create_heredoc(divpipe->cmd[1]);//test
 	else
 		return (NULL);
 	return (divpipe);
