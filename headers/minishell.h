@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/13 19:07:30 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:34:08 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_redirect	*ft_rednew(t_type type, char *arg);
 void		ft_redadd_back(t_redirect **red, t_redirect *new);
 
 char		*put_paths(t_divpipe *divpipe, char **env);
-t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish);
+t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd);
 int			is_builtin(char	*cmd);
 char		*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red);
 void		ft_redirection(t_redirect *red, t_minish *minish);
@@ -132,5 +132,11 @@ void	cd_back(t_minish *minish);
 int		check_signal();
 void	manage_static_minish(t_minish *to_set);
 void	signal_heredoc(int signal);
+
+int		check_signal();
+void	manage_static_minish(t_minish *to_set);
+void	signal_heredoc(int signal);
+
+void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish);
 
 #endif
