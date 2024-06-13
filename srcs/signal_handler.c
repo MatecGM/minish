@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:05 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/11 16:52:12 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:24:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_signal;
+sig_atomic_t g_signal = 0;
 
 int	interactive_mode(t_bool change, int new_value)
 {
@@ -23,7 +23,7 @@ int	interactive_mode(t_bool change, int new_value)
 	return (is_interactive_mode);
 }
 
-void	check_signal()
+int	check_signal()
 {
 	int	signal;
 
@@ -36,18 +36,16 @@ void	check_signal()
 		if (interactive_mode(FALSE, 0))
 			rl_redisplay();
 	}
-	if (signal == SIGQUIT)
-	{
-		if (!interactive_mode(FALSE, 0))
-			ft_putstr_fd("test\n", 1);
-	}
+	g_signal = 0;
+	return (signal);
 }
 
 void	signal_handler(int signal)
 {
 	if (!g_signal)
 		g_signal = signal;
-	check_signal();
+	if (interactive_mode(FALSE, 1))
+		check_signal();
 }
 
 int	init_signal_handler()

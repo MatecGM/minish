@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rednew.c                                        :+:      :+:    :+:   */
+/*   signal_handler_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:08:01 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/13 18:53:58 by fparis           ###   ########.fr       */
+/*   Created: 2024/06/13 17:22:22 by fparis            #+#    #+#             */
+/*   Updated: 2024/06/13 18:37:25 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redirect	*ft_rednew(t_type type, char *arg)
+void	manage_static_minish(t_minish *to_set)
 {
-	t_redirect	*l;
+	static t_minish	*s_minish = NULL;
 
-	l = malloc(sizeof(t_redirect));
-	if (l == NULL)
-		return (NULL);
-	l->type = type;
-	l->arg = arg;
-	l->heredoc_name = NULL;
-	l->next = NULL;
-	return (l);
+	if (!to_set && s_minish)
+		exit_free(s_minish, g_signal);
+	else if (to_set)
+		s_minish = to_set;
+}
+
+void	signal_heredoc(int signal)
+{
+	if (!g_signal)
+		g_signal = signal;
+	if (signal == SIGINT)
+		manage_static_minish(NULL);
 }

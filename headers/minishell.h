@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 18:56:08 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:07:30 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <signal.h>
 # include <termios.h>
 # include <errno.h>
+
+extern sig_atomic_t g_signal;
 
 typedef enum	e_type
 {
@@ -64,6 +66,7 @@ typedef struct	s_redirect
 {
 	t_type				type;
 	char				*arg;
+	char				*heredoc_name;
 	t_bool				quote;
 	struct s_redirect	*next;
 }	t_redirect;
@@ -113,8 +116,8 @@ void		ft_redadd_back(t_redirect **red, t_redirect *new);
 char		*put_paths(t_divpipe *divpipe, char **env);
 t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish);
 int			is_builtin(char	*cmd);
-char		*create_heredoc(char *heredoc_EOF);
-void		ft_redirection(t_redirect *red);
+char		*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red);
+void		ft_redirection(t_redirect *red, t_minish *minish);
 
 void	ft_freered(t_redirect *redirect);
 void	ft_free_pipe(t_divpipe *pipe);
@@ -125,5 +128,9 @@ void	update_shlvl(t_minish *minish);
 void	cd_home(t_minish *minish);
 void	default_cd(char **tab, t_minish *minish);
 void	cd_back(t_minish *minish);
+
+int		check_signal();
+void	manage_static_minish(t_minish *to_set);
+void	signal_heredoc(int signal);
 
 #endif

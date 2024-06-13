@@ -95,6 +95,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(str);
 			interactive_mode(TRUE, 0);
 			minish.divpipe = ft_parsing(str, minish.env);
+			free(str);
 			if (!minish.divpipe)
 				exit_free(&minish, 1);
 
@@ -105,10 +106,14 @@ int	main(int argc, char **argv, char **env)
 			update_underscore(&minish);
 			while (tmp_pipe)
 			{
+				if (check_signal())
+					break;
 				//-----faire les trucs de redirection------
-				//ft_redirection(tmp_pipe->redirect);
+				//ft_redirection(tmp_pipe->redirect, &minish);
 				executer(tmp_pipe, &minish);
 				tmp_pipe = tmp_pipe->next;
+				if (check_signal())
+					break;
 			}
 			if (minish.divpipe)
 				ft_free_pipe(minish.divpipe);
@@ -138,7 +143,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		else if (!str)
 			break ;
-		free(str);
+		
 	}
 	ft_putstr_fd("exit\n", 2);
 	exit_free(&minish, 0);

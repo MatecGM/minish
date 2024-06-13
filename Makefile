@@ -6,7 +6,7 @@
 #    By: fparis <fparis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/06/07 18:33:44 by fparis           ###   ########.fr        #
+#    Updated: 2024/06/13 17:40:54 by fparis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRCS = main.c\
 		redirect/ft_freered.c\
 		free_minish.c\
 		update_var.c\
-		cd_utils.c
+		cd_utils.c\
+		signal_handler_2.c
 
 LIBFT = libft/libft.a
 

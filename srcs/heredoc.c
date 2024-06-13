@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/05/31 20:29:33 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:21:58 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,12 @@ char	*get_heredoc_name()
 	return (name);
 }
 
-char	*write_user_entry(int fd, char *heredoc_EOF)
+int	write_user_entry(int fd, char *heredoc_EOF)
 {
 	char	*line;
 
 	line = readline("> ");
-	if (!line)
-		return (NULL);
-	while (line && ft_strncmp(line, heredoc_EOF, ft_strlen(line)))
+	while (line && ft_strcmp(line, heredoc_EOF))
 	{
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
@@ -75,10 +73,32 @@ char	*write_user_entry(int fd, char *heredoc_EOF)
 		, heredoc_EOF, "')");
 	else
 		free(line);
-	return (heredoc_EOF);
+	return (1);
 }
 
-char	*create_heredoc(char *heredoc_EOF)
+int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish)
+{
+	int	pid;
+	int	status;
+
+	pid = fork();
+	if (pid == -1)
+		return (0);
+	if (!pid)
+	{
+		if (signal(SIGINT, signal_heredoc) == SIG_ERR)
+			exit_free(minish, -1);
+		manage_static_minish(minish);
+		write_user_entry(fd, heredoc_EOF);
+		exit_free(minish, 0);
+	}
+	waitpid(pid, NULL, 0);
+	//if (WEXITSTATUS(status))
+		//g_signal = WEXITSTATUS(status);
+	return (1);
+}
+
+char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 {
 	int		heredoc_fd;
 	char	*heredoc_name;
@@ -86,13 +106,13 @@ char	*create_heredoc(char *heredoc_EOF)
 	heredoc_name = get_heredoc_name();
 	if (!heredoc_name)
 		return (NULL);
-	heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	//heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (heredoc_fd == -1)
 	{
 		free(heredoc_name);
 		return (NULL);
 	}
-	if (!write_user_entry(heredoc_fd, heredoc_EOF))
+	if (!create_heredoc_fork(heredoc_fd, heredoc_EOF, minish))
 	{
 		close(heredoc_fd);
 		free(heredoc_name);
