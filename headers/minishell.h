@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/13 19:34:08 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/14 20:46:08 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_divpipe
 	char				*cmd_path;
 	struct s_redirect	*redirect;
 	struct s_divpipe	*next;
+	int					child_pid;
 }	t_divpipe;
 
 typedef struct	s_redirect
@@ -117,7 +118,7 @@ char		*put_paths(t_divpipe *divpipe, char **env);
 t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd);
 int			is_builtin(char	*cmd);
 char		*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red);
-void		ft_redirection(t_redirect *red, t_minish *minish);
+void	ft_redirection(t_redirect *red, int *fd, t_minish *minish);
 
 void	ft_freered(t_redirect *redirect);
 void	ft_free_pipe(t_divpipe *pipe);
@@ -138,5 +139,6 @@ void	manage_static_minish(t_minish *to_set);
 void	signal_heredoc(int signal);
 
 void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish);
+void    wait_all_pipe(t_minish *minish);
 
 #endif

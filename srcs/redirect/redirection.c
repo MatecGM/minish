@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:58:31 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/13 19:36:02 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/14 22:07:32 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
 	char	*name;
 
-	if (!minish)
+	if (!minish)                                              
 		return ;
 	name = create_heredoc(arg, minish, red);
 	//if (!name)
@@ -53,9 +53,10 @@ void	ft_outappend(char *arg, t_redirect *red, int *fd, t_minish *minish)
 	fd[1] = open(arg, O_WRONLY | O_CREAT, 0644);
 }
 
-void	ft_redirection(t_redirect *red, int *fd, int *pip)
+void	ft_redirection(t_redirect *red, int *fd, t_minish *minish)
 {
-	const void (*fred[4])(char *, t_redirect *, int *, t_minish *) = {ft_infile, ft_outfile, ft_heredoc, ft_outappend};
+	const void (*fred[4])(char *, t_redirect *, int *, t_minish *) = {ft_infile, 
+		ft_outfile, ft_heredoc, ft_outappend};
 	t_redirect	*ptr;
 
 	ptr = red;
@@ -64,12 +65,4 @@ void	ft_redirection(t_redirect *red, int *fd, int *pip)
 		fred[ptr->type - 2](ptr->arg, ptr, fd, minish);
 		ptr = ptr->next;
 	}
-	if (fd[0] == -1 && pip[0] != -1)
-		fd[0] = pip[0];
-	else if (fd[0] == -1)
-		fd[0] = 0;
-	if (fd[1] == -1 && pip[1] != -1)
-		fd[1] = pip[1];
-	else if (fd[1] == -1)
-		fd[1] = 1;
 }

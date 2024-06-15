@@ -104,17 +104,8 @@ int	main(int argc, char **argv, char **env)
 			tmp_pipe = minish.divpipe;
 			minish.in_pipe = minish.divpipe->next != NULL;
 			update_underscore(&minish);
-			while (tmp_pipe)
-			{
-				if (check_signal())
-					break;
-				//-----faire les trucs de redirection------
-				//ft_redirection(tmp_pipe->redirect, &minish);
-				executer(tmp_pipe, &minish);
-				tmp_pipe = tmp_pipe->next;
-				if (check_signal())
-					break;
-			}
+			//-----faire les trucs de redirection------
+			ft_execpipes(tmp_pipe, &minish);
 			if (minish.divpipe)
 				ft_free_pipe(minish.divpipe);
 			minish.divpipe = NULL;

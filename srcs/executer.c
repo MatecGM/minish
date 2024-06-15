@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/13 19:34:35 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/14 22:05:41 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
 
 void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
-	dup2(fd[0], 0);
-	dup2(fd[1], 1);
+	
+	if (fd[0] != -1)
+		dup2(fd[0],0);
+	if (fd[1] != -1)
+		dup2(fd[1],1);
 	close(fd[0]);
 	close(fd[1]);
-	ft_printf("%d\n", fd[0]);
+
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 	{
@@ -63,30 +66,39 @@ void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
 {
 	int	fd[2];
 	int	pip[2];
+	int	pipread;
 
 	pip[0] = -1;
 	pip[1] = -1;
+	pipread = -1;
 	while (divpipe)
 	{
-		fd[0] = -1;
-		fd[1] = -1;
-		ft_redirection(divpipe->redirect, fd, pip);
-		executer(divpipe, minish, fd);
-		if (pip[0] != -1)
-			close(pip[0]);
-		if (pip[1] != -1)
-			close(pip[1]);
 		if (divpipe->next)
 			pipe(pip);
+		if (check_signal())
+			break;
+		fd[0] = -1;
+		fd[1] = -1;
+		ft_redirection(divpipe->redirect, fd, minish);
+		if (fd[0] == -1 && pipread != -1)
+			fd[0] = pipread;
+		if (fd[1] == -1 && pip[1] != -1 && divpipe->next)
+			fd[1] = pip[1];
+		executer(divpipe, minish, fd);
+		if (divpipe->next)
+			close(pip[1]);
+		pipread = pip[0];
+		if (check_signal())
+			break;
 		divpipe = divpipe->next;
 	}
+	wait_all_pipe(minish);
 }
 
 
 t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
 	int	child_pid;
-	int	status;
 
 	if (try_builtins(divpipe, minish))
 		return (divpipe);
@@ -99,10 +111,7 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 	child_pid = fork();
 	if (child_pid == 0)
 		exec_fork(divpipe, minish, fd);
-	waitpid(child_pid, &status, 0);
-	if (WIFEXITED(status))
-		minish->exit_status = WEXITSTATUS(status);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
- 		print_error("Quit (core dumped)", NULL, NULL);
+	divpipe->child_pid = child_pid;
+
 	return (divpipe);
 }
