@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/06 22:14:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/15 18:24:34 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*print_declare(char **env)
+char	*print_declare(char **env, int fd)
 {
 	int	i2;
 	int	i;
@@ -22,25 +22,25 @@ char	*print_declare(char **env)
 	{
 		if (ft_strncmp(env[i], "_=", 2) != 0)
 		{
-			printf("declare -x ");
+			ft_putstr_fd("declare -x ", fd);
 			i2 = -1;
 			while (env[i][++i2] && env[i][i2] != '=')
-				printf("%c", env[i][i2]);
+				ft_putchar_fd(env[i][i2], fd);
 			if (env[i][i2] == '=')
 			{
-				printf("=\"");
+				ft_putstr_fd("=\"", fd);
 				while (env[i][++i2])
-					printf("%c", env[i][i2]);
-				printf("\"");
+					ft_putchar_fd(env[i][i2], fd);
+				ft_putstr_fd("\"", fd);
 			}
-			printf("\n");
+			ft_putstr_fd("\n", fd);
 		}
 		i++;
 	}
 	return (*env);
 }
 
-void	print_ascii_order(char **env)
+void	print_ascii_order(char **env, int fd)
 {
 	char	**env_dup;
 	int		i;
@@ -64,7 +64,7 @@ void	print_ascii_order(char **env)
 		ft_swap_str(env_dup, i, i_min);
 		i++;
 	}
-	print_declare(env_dup);
+	print_declare(env_dup, fd);
 	ft_free_tab(env_dup);
 }
 
@@ -90,7 +90,7 @@ int	is_good_env(char *env_var)
 	return (-1);
 }
 
-void	ft_export(char **tab, t_minish *minish)
+void	ft_export(char **tab, t_minish *minish, int fd)
 {
 	int	res;
 	int	i;
@@ -98,7 +98,7 @@ void	ft_export(char **tab, t_minish *minish)
 	minish->exit_status = 0;
 	if (ft_strtablen(tab) == 1)
 	{
-		print_ascii_order(minish->env);
+		print_ascii_order(minish->env, fd);
 		return ;
 	}
 	i = 1;

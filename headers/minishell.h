@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/14 20:46:08 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/15 18:22:33 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,18 @@ void	print_error(char *str1, char *str2, char *str3);
 void	remove_var(t_minish *minish, char *name);
 void	add_var(t_minish *minish, char *env_var);
 void	print_error(char *str1, char *str2, char *str3);
-void	ft_echo(char **tab, t_minish *minish);
-void	ft_cd(char **tab, t_minish *minish);
-void	ft_pwd(char **tab, t_minish *minish);
+void	ft_echo(char **tab, t_minish *minish, int fd);
+void	ft_cd(char **tab, t_minish *minish, int fd);
+void	ft_pwd(char **tab, t_minish *minish, int fd);
 void	ft_unset(char **tab, t_minish *minish);
-void	ft_env(char **tab, char **env, t_minish *minish);
-void	ft_export(char **tab, t_minish *minish);
+void	ft_env(char **tab, char **env, t_minish *minish, int fd);
+void	ft_export(char **tab, t_minish *minish, int fd);
 int		init_signal_handler();
 int		get_current_signal();
 int		interactive_mode(t_bool to_change, int new_value);
 int		is_good_env(char *env_var);
 void	append_var(t_minish *minish, char *env_var);
-void	ft_exit(char **tab, t_minish *minish);
+void	ft_exit(char **tab, t_minish *minish, int fd);
 int		get_name_len(char *env_var);
 
 t_divpipe	*ft_parsing(char *input, char **env);
@@ -128,7 +128,7 @@ void	update_pwd(t_minish *minish, char *name);
 void	update_shlvl(t_minish *minish);
 void	cd_home(t_minish *minish);
 void	default_cd(char **tab, t_minish *minish);
-void	cd_back(t_minish *minish);
+void	cd_back(t_minish *minish, int fd);
 
 int		check_signal();
 void	manage_static_minish(t_minish *to_set);

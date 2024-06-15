@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 19:37:51 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/15 18:27:06 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_echo_parameter(char **check)
 	return (res);
 }
 
-void	ft_echo(char **tab, t_minish *minish)
+void	ft_echo(char **tab, t_minish *minish, int fd)
 {
 	int		i;
 	int		parameter;
@@ -53,17 +53,17 @@ void	ft_echo(char **tab, t_minish *minish)
 	i = parameter;
 	while (tab[i])
 	{
-		printf("%s", tab[i]);
+		ft_putstr_fd(tab[i], fd);
 		i++;
 		if (tab[i])
-			printf(" ");
+			ft_putchar_fd(' ', fd);
 	}
 	if (parameter == 1)
-		printf("\n");
+		ft_putstr_fd("\n", fd);
 	minish->exit_status = 0;
 }
 
-void	ft_cd(char **tab, t_minish *minish)
+void	ft_cd(char **tab, t_minish *minish, int fd)
 {
 	if (minish->in_pipe)
 		return ;
@@ -73,12 +73,12 @@ void	ft_cd(char **tab, t_minish *minish)
 	else if (ft_strtablen(tab) > 2)
 		print_error("minish: cd: too many arguments", NULL, NULL);
 	else if (!ft_strcmp(tab[1], "-"))
-		cd_back(minish);
+		cd_back(minish, fd);
 	else
 		default_cd(tab, minish);
 }
 
-void	ft_pwd(char **tab, t_minish *minish)
+void	ft_pwd(char **tab, t_minish *minish, int fd)
 {
 	char *path;
 
@@ -95,7 +95,7 @@ void	ft_pwd(char **tab, t_minish *minish)
 		}
 		exit_free(minish, 1);
 	}
-	printf("%s\n", path);
+	ft_putendl_fd(path, fd);
 	free(path);
 	minish->exit_status = 0;
 }

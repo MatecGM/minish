@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/14 22:05:41 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/15 18:29:08 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,24 @@ int	is_builtin(char	*cmd)
 	return (0);
 }
 
-t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish)
+t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish, int fd)
 {
+	if (fd == -1)
+		fd = 1;
 	if (!strcmp(divpipe->cmd[0], "export"))
-		ft_export(divpipe->cmd, minish);
+		ft_export(divpipe->cmd, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "echo"))
-		ft_echo(divpipe->cmd, minish);
+		ft_echo(divpipe->cmd, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "cd"))
-		ft_cd(divpipe->cmd, minish);
+		ft_cd(divpipe->cmd, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "pwd"))
-		ft_pwd(divpipe->cmd, minish);
+		ft_pwd(divpipe->cmd, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "unset"))
 		ft_unset(divpipe->cmd, minish);
 	else if (!strcmp(divpipe->cmd[0], "env"))
-		ft_env(divpipe->cmd, minish->env, minish);
+		ft_env(divpipe->cmd, minish->env, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "exit"))
-		ft_exit(divpipe->cmd, minish);
+		ft_exit(divpipe->cmd, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "heredoc"))
 		create_heredoc("EOF", minish, divpipe->redirect);
 	else
@@ -53,7 +55,6 @@ void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 		dup2(fd[1],1);
 	close(fd[0]);
 	close(fd[1]);
-
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 	{
@@ -75,11 +76,11 @@ void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
 	{
 		if (divpipe->next)
 			pipe(pip);
-		if (check_signal())
-			break;
 		fd[0] = -1;
 		fd[1] = -1;
 		ft_redirection(divpipe->redirect, fd, minish);
+		if (check_signal())
+			break;
 		if (fd[0] == -1 && pipread != -1)
 			fd[0] = pipread;
 		if (fd[1] == -1 && pip[1] != -1 && divpipe->next)
@@ -100,7 +101,7 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
 	int	child_pid;
 
-	if (try_builtins(divpipe, minish))
+	if (try_builtins(divpipe, minish, fd[1]))
 		return (divpipe);
 	if (!divpipe->cmd_path)
 	{

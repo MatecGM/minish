@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:33:29 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 19:11:41 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/15 18:22:34 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	default_cd(char **tab, t_minish *minish)
 		print_error("cd: no such file or directory: ", tab[1], NULL);
 }
 
-void	cd_back(t_minish *minish)
+void	cd_back(t_minish *minish, int fd)
 {
 	char	*old_pwd;
 
@@ -70,9 +70,10 @@ void	cd_back(t_minish *minish)
 	{
 		if (!old_pwd[0] || access(old_pwd, R_OK) == 0)
 		{
-			printf("%s\n", old_pwd);
+			ft_putstr_fd(old_pwd, fd);
+			ft_putstr_fd("\n", fd);
 			update_pwd(minish, "OLDPWD=");
-			chdir(old_pwd); //old_pwd pas protec
+			chdir(old_pwd);
 			update_pwd(minish, "PWD=");
 			minish->exit_status = 0;
 		}

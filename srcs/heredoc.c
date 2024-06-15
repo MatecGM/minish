@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/13 19:21:58 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/15 17:31:43 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 	heredoc_name = get_heredoc_name();
 	if (!heredoc_name)
 		return (NULL);
-	//heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (heredoc_fd == -1)
 	{
 		free(heredoc_name);

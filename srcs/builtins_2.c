@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/07 20:27:41 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/15 18:22:36 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_unset(char **tab, t_minish *minish)
 	}
 }
 
-void	ft_env(char **tab, char **env, t_minish *minish)
+void	ft_env(char **tab, char **env, t_minish *minish, int fd)
 {
 	int	i;
 
@@ -43,9 +43,9 @@ void	ft_env(char **tab, char **env, t_minish *minish)
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], "_=", 2))
-			printf("_=/usr/bin/env\n");
+			ft_putstr_fd("_=/usr/bin/env\n", fd);
 		else if (is_good_env(env[i]) == 1)
-			printf("%s\n", env[i]);
+			ft_putendl_fd(env[i], fd);
 		i++;
 	}
 	minish->exit_status = 0;
@@ -65,7 +65,7 @@ int	get_exit_code(char **tab)
 		{
 			if (tab[1][i] < '0' || tab[1][i] > '9')
 			{
-				printf("minish: exit: %s: numeric argument required", tab[1]);
+				print_error("minish: exit: ", tab[1],": numeric argument required");
 				return (2);
 			}
 			else
@@ -76,7 +76,7 @@ int	get_exit_code(char **tab)
 	return (exit_code);
 }
 
-void	ft_exit(char **tab, t_minish *minish)
+void	ft_exit(char **tab, t_minish *minish, int fd)
 {
 	int	exit_code;
 
@@ -84,7 +84,7 @@ void	ft_exit(char **tab, t_minish *minish)
 	exit_code = 0;
 	if (ft_strtablen(tab) > 2)
 	{
-		printf("minish: exit: too many arguments\n");
+		ft_putstr_fd("minish: exit: too many arguments\n", 2);
 		minish->exit_status = 1;
 		return ;
 	}
