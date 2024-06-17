@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:30:55 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/27 17:58:20 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 19:17:06 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_word_filler(char *src, char *dst)
 			quote = !quote;
 		else
 			dst[i++] = *src;
-		src ++;
+		src ++;	
 	}
 	if (!*src && quote)
 		ft_putstr_fd("Error: unclosed quote\n", 2);
@@ -113,6 +113,11 @@ char	**ft_split_quote(char *str)
 
 	cmd = NULL;
 	j = 0;
+	if (!str[0])
+	{
+		cmd = ft_calloc(2, sizeof(char *));
+		cmd[0] = ft_strdup(str);
+	}
 	while (str && *str)
 	{
 		len = ft_quote_len(str);

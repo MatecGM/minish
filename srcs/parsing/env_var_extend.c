@@ -6,11 +6,12 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/29 20:15:04 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 19:18:26 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minish
+	ft_printf("%p$\n", divpipe->cmd);ell.h"
 
 t_bool	ft_hasdollars(char *str)
 {
