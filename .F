@@ -1,2 +1,0 @@
-ptdr
-lol

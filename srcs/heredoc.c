@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 19:43:51 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 22:02:44 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	write_user_entry(int fd, char *heredoc_EOF, t_redirect *red, t_minish *minis
 	while (line && ft_strcmp(line, heredoc_EOF))
 	{
 		if (!red->quote)
-			line = extender(line, minish->env, TRUE);
+			line = extender(line, minish, TRUE);
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);
@@ -92,7 +92,7 @@ int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish, t_redirect 
 			exit_free(minish, -1);
 		manage_static_minish(minish);
 		write_user_entry(fd, heredoc_EOF, red, minish);
-		exit_free(minish, 0);
+		exit_free_fork(minish, 0);
 	}
 	waitpid(pid, NULL, 0);
 	//if (WEXITSTATUS(status))
@@ -108,6 +108,7 @@ char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 	heredoc_name = get_heredoc_name();
 	if (!heredoc_name)
 		return (NULL);
+	red->heredoc_name = heredoc_name;
 	heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (heredoc_fd == -1)
 	{

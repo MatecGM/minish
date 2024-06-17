@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 20:20:58 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 23:03:53 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,8 @@ void	signal_heredoc(int signal);
 
 void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish);
 void    wait_all_pipe(t_minish *minish);
+void	unlink_all_heredoc(t_minish *minish);
+void	exit_free_fork(t_minish *minish, int exit_code);
+void	close_all_fd(void);
 
 #endif

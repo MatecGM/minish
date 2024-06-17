@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:50:46 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 19:49:32 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 21:35:29 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,4 @@ void	update_shlvl(t_minish *minish)
 		exit_free(minish, 1);
 	add_var(minish, new_var);
 	free(new_var);
-}
-
-char	*extend_(t_minish *minish, char *name)
-{
-	if (!ft_strcmp(name, "?"))
-	
-	return (NULL);
 }

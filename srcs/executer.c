@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 19:38:21 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 23:07:32 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,15 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish, int fd)
 
 void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
-	
 	if (fd[0] != -1)
 		dup2(fd[0],0);
 	if (fd[1] != -1)
 		dup2(fd[1],1);
-	close(fd[0]);
-	close(fd[1]);
+	close_all_fd();
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 		perror("minish");
-	exit_free(minish, 1);
+	exit_free_fork(minish, 1);
 }
 
 void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
@@ -111,6 +109,5 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 	if (child_pid == 0)
 		exec_fork(divpipe, minish, fd);
 	divpipe->child_pid = child_pid;
-
 	return (divpipe);
 }

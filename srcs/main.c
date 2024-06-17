@@ -106,6 +106,7 @@ int	main(int argc, char **argv, char **env)
 			update_underscore(&minish);
 			//-----faire les trucs de redirection------
 			ft_execpipes(tmp_pipe, &minish);
+			unlink_all_heredoc(&minish);
 			if (minish.divpipe)
 				ft_free_pipe(minish.divpipe);
 			minish.divpipe = NULL;
