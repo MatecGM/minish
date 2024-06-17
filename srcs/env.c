@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 20:06:59 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 23:42:45 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	add_var(t_minish *minish, char *env_var)
 		if (get_name_len(env_var) == ft_strlen(env_var)
 			&& env_var[ft_strlen(env_var) - 1] != '=')
 			return ;
-		remove_var(minish, env_var); //bien check ce cas la parce que changement de tab inter fonction suspect
+		remove_var(minish, env_var);
 	}
 	new_env = ft_calloc(ft_strtablen(minish->env) + 2, sizeof(char **));
 	if (!new_env)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/17 20:20:42 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:16:25 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_type typage(char *elem)
+t_type	typage(char *elem)
 {
 	if (!ft_strcmp(elem, "<<"))
 		return (theredoc);
@@ -37,7 +37,7 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 	new->quote = ft_quote_first_arg(arg);
 	ft_redadd_back(&(cpipe->redirect), new);
 	i = 1;
-	while(split[i])
+	while (split[i])
 	{
 		tmp = *cmd;
 		if (tmp)
@@ -51,7 +51,6 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 		i ++;
 	}
 	free(split);
-
 }
 
 int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
@@ -98,7 +97,7 @@ t_divpipe	*ft_parsing(char *input, t_minish *minish)
 	{
 		cpipe = ft_pipenew();
 		if (!cpipe)
-			break;
+			break ;
 		cpipe->redirect = NULL;
 		ft_pipeadd_back(&divpipe, cpipe);
 		i = inpipe(cpipe, toked, i, minish);

@@ -6,13 +6,13 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:05 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/13 17:24:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:22:21 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-sig_atomic_t g_signal = 0;
+sig_atomic_t	g_signal = 0;
 
 int	interactive_mode(t_bool change, int new_value)
 {
@@ -23,7 +23,7 @@ int	interactive_mode(t_bool change, int new_value)
 	return (is_interactive_mode);
 }
 
-int	check_signal()
+int	check_signal(void)
 {
 	int	signal;
 
@@ -48,15 +48,11 @@ void	signal_handler(int signal)
 		check_signal();
 }
 
-int	init_signal_handler()
+int	init_signal_handler(void)
 {
 	g_signal = 0;
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR || signal(SIGINT, signal_handler) == SIG_ERR)
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR
+		|| signal(SIGINT, signal_handler) == SIG_ERR)
 		return (-1);
 	return (0);
-}
-
-int	get_current_signal()
-{
-	return (g_signal);
 }

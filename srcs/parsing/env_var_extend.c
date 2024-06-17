@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_extend.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/17 20:18:00 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:21:13 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	ft_hasdollars(char *str)
 {
-	while(str && *str)
+	while (str && *str)
 	{
 		if (*str == '$')
 			return (TRUE);
@@ -32,7 +32,7 @@ static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 	quote = FALSE;
 	if (onheredock)
 		return (FALSE);
-	while(i < index)
+	while (i < index)
 	{
 		if (str[i] == '\'')
 			quote = !quote;
@@ -41,7 +41,7 @@ static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 	return (quote);
 }
 
-static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)	
+static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 {
 	int		i;
 	char	*value;
@@ -57,19 +57,19 @@ static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 			{
 				len += ft_intlen(minish->exit_status);
 				i += 2;
-				continue;
+				continue ;
 			}
 			value = get_env_value(minish->env, str + i + 1);
 			len += ft_strlen(value);
 			i ++;
-			while(str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				i ++;
 			free(value);
 		}
 		else
 		{
 			len ++;
-			i ++;	
+			i ++;
 		}
 	}
 	return (len);
@@ -83,7 +83,8 @@ char	*extender(char *str, t_minish *minish, t_bool onheredock)
 	char	*new;
 	t_bool	single_quote;
 
-	new = ft_calloc(ft_strlen_extend(str, minish, onheredock) + 1, sizeof(char));
+	new = ft_calloc(ft_strlen_extend(str, minish, onheredock)
+			+ 1, sizeof(char));
 	if (!new)
 		return (NULL);
 	i = 0;
@@ -100,7 +101,7 @@ char	*extender(char *str, t_minish *minish, t_bool onheredock)
 					return (NULL);
 				new = ft_strcat(new, value);
 				free(value);
-				continue;
+				continue ;
 			}
 			value = get_env_value(minish->env, str + i + 1);
 			if (value)
@@ -108,14 +109,14 @@ char	*extender(char *str, t_minish *minish, t_bool onheredock)
 			j += ft_strlen(value);
 			free(value);
 			i++;
-			while(str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				i ++;
 		}
 		else
 		{
 			new[j] = str[i];
 			j ++;
-			i ++;	
+			i ++;
 		}
 	}
 	free(str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:22:36 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:10:18 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	get_exit_code(char **tab)
 		{
 			if (tab[1][i] < '0' || tab[1][i] > '9')
 			{
-				print_error("minish: exit: ", tab[1],": numeric argument required");
+				print_error("minish: exit: ",
+					tab[1], ": numeric argument required");
 				return (2);
 			}
 			else

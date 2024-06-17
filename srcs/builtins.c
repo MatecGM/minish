@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:43:21 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:27:06 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:18:10 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_cd(char **tab, t_minish *minish, int fd)
 
 void	ft_pwd(char **tab, t_minish *minish, int fd)
 {
-	char *path;
+	char	*path;
 
 	minish->exit_status = 1;
 	if (ft_strtablen(tab) > 1)

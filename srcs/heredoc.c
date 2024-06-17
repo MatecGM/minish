@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 22:02:44 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:09:43 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*try_new_name(char *name)
 	else
 	{
 		i = 1;
-		while(name[i])
+		while (name[i])
 		{
 			name[i] = 'A';
 			i++;
@@ -38,10 +38,10 @@ char	*try_new_name(char *name)
 	return (name);
 }
 
-char	*get_heredoc_name()
+char	*get_heredoc_name(void)
 {
 	char	*name;
-	
+
 	name = ft_calloc(3, sizeof(char));
 	if (!name)
 		return (NULL);
@@ -56,7 +56,8 @@ char	*get_heredoc_name()
 	return (name);
 }
 
-int	write_user_entry(int fd, char *heredoc_EOF, t_redirect *red, t_minish *minish)
+int	write_user_entry(int fd, char *heredoc_EOF,
+			t_redirect *red, t_minish *minish)
 {
 	char	*line;
 
@@ -71,14 +72,19 @@ int	write_user_entry(int fd, char *heredoc_EOF, t_redirect *red, t_minish *minis
 		line = readline("> ");
 	}
 	if (!line)
-		print_error("minish: warning: here-document delimited by end-of-file (wanted `"
-		, heredoc_EOF, "')");
+	{
+		ft_putstr_fd("minish: warning: here-document delimited by", 2);
+		ft_putstr_fd(" end-of-file (wanted `", 2);
+		ft_putstr_fd(heredoc_EOF, 2);
+		ft_putstr_fd("')\n", 2);
+	}
 	else
 		free(line);
 	return (1);
 }
 
-int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish, t_redirect *red)
+int	create_heredoc_fork(int fd, char *heredoc_EOF,
+		t_minish *minish, t_redirect *red)
 {
 	int	pid;
 	int	status;
@@ -95,8 +101,6 @@ int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish, t_redirect 
 		exit_free_fork(minish, 0);
 	}
 	waitpid(pid, NULL, 0);
-	//if (WEXITSTATUS(status))
-		//g_signal = WEXITSTATUS(status);
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:45:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:24:34 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:12:41 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	is_good_env(char *env_var)
 	if (!ft_isalpha(env_var[0]) && env_var[0] != '_')
 		return (0);
 	while (env_var[i] && env_var[i] != '=' && !(env_var[i] == '+' && env_var[i
-			+ 1] == '='))
+				+ 1] == '='))
 	{
 		if (!ft_isalpha(env_var[i]) && !ft_isdigit(env_var[i])
 			&& env_var[i] != '_')
@@ -108,7 +108,7 @@ void	ft_export(char **tab, t_minish *minish, int fd)
 		if (res == 0)
 		{
 			print_error("minish: export: '", tab[i],
-					"': not a valid identifier");
+				"': not a valid identifier");
 			minish->exit_status = 1;
 		}
 		else if (!minish->in_pipe && (res == 1 || res == -1))

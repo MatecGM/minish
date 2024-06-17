@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:50:46 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 21:35:29 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/17 23:47:27 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	update_underscore(t_minish *minish)
 		i++;
 	}
 	new_underscore = ft_strjoin("_=", new_underscore);
+	minish->to_free = new_underscore;
 	add_var(minish, new_underscore);
+	minish->to_free = NULL;
 	free(new_underscore);
 }
 
@@ -48,8 +50,10 @@ void	update_pwd(t_minish *minish, char *name)
 	}
 	new_pwd = ft_strjoin(name, path);
 	free(path);
+	minish->to_free = new_pwd;
 	add_var(minish, new_pwd);
-	free(new_pwd); //pas protected
+	minish->to_free = NULL;
+	free(new_pwd);
 }
 
 int	get_new_shlvl(char *old_lvl)
@@ -100,6 +104,8 @@ void	update_shlvl(t_minish *minish)
 	free(new_lvl);
 	if (!new_var)
 		exit_free(minish, 1);
+	minish->to_free = new_var;
 	add_var(minish, new_var);
+	minish->to_free = NULL;
 	free(new_var);
 }

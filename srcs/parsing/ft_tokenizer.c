@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/05/25 17:42:56 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:15:20 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	countel(char *str)
 
 	nb = 0;
 	ptr = str;
-	while(*ptr)
+	while (*ptr)
 	{
 		if (*ptr && !is_delimiter(*ptr))
 			nb++;
@@ -43,8 +43,8 @@ static int	countel(char *str)
 int	split_tab(char *str, int i, int *i_tab, char **tab)
 {
 	t_bool	type;
-	int end;
-	int	j;
+	int		end;
+	int		j;
 
 	type = is_delimiter(str[i]);
 	end = i;

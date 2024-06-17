@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:33:29 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:22:34 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:18:23 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	cd_home(t_minish *minish)
 {
 	char	*home;
-	
+
 	minish->exit_status = 1;
 	home = get_env_value(minish->env, "HOME=");
 	if (!home)

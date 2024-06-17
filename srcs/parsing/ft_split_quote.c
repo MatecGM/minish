@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:30:55 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/17 19:17:06 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:15:34 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_word_filler(char *src, char *dst)
 			quote = !quote;
 		else
 			dst[i++] = *src;
-		src ++;	
+		src ++;
 	}
 	if (!*src && quote)
 		ft_putstr_fd("Error: unclosed quote\n", 2);

@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 23:07:32 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:21:48 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish, int fd)
 void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
 	if (fd[0] != -1)
-		dup2(fd[0],0);
+		dup2(fd[0], 0);
 	if (fd[1] != -1)
-		dup2(fd[1],1);
+		dup2(fd[1], 1);
 	close_all_fd();
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
@@ -74,7 +74,7 @@ void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
 		fd[1] = -1;
 		ft_redirection(divpipe->redirect, fd, minish);
 		if (check_signal())
-			break;
+			break ;
 		if (fd[0] == -1 && pipread != -1)
 			fd[0] = pipread;
 		if (fd[1] == -1 && pip[1] != -1 && divpipe->next)
@@ -84,12 +84,11 @@ void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
 			close(pip[1]);
 		pipread = pip[0];
 		if (check_signal())
-			break;
+			break ;
 		divpipe = divpipe->next;
 	}
 	wait_all_pipe(minish);
 }
-
 
 t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {

@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:41:37 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/05 22:24:18 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:25:02 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,16 @@ void	append_var(t_minish *minish, char *env_var)
 		len = get_append_len(env_var);
 		if (!len)
 			return ;
-		new_var = (ft_strjoin(minish->env[last_index], env_var + (ft_strlen(env_var) - len + (ft_strchr(minish->env[last_index], '=') != NULL))));
+		new_var = (ft_strjoin(minish->env[last_index], env_var
+					+ (ft_strlen(env_var) - len
+						+ (ft_strchr(minish->env[last_index], '=') != NULL))));
 	}
 	else
 		new_var = remove_plus(env_var);
 	if (!new_var)
 		exit_free(minish, 1);
-	add_var(minish, new_var); //si malloc echoue ca fait des leaks mais bon
+	minish->to_free = new_var;
+	add_var(minish, new_var);
+	minish->to_free = NULL;
 	free(new_var);
 }

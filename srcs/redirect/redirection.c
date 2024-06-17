@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:58:31 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/17 22:14:47 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:18:00 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ const int	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
 	char	*name;
 
-	if (!minish)                                              
+	if (!minish)
 		return (0);
 	name = create_heredoc(arg, minish, red);
 	if (!name)
@@ -59,8 +59,8 @@ const int	ft_outappend(char *arg, t_redirect *red, int *fd, t_minish *minish)
 
 void	ft_redirection(t_redirect *red, int *fd, t_minish *minish)
 {
-	const int (*fred[4])(char *, t_redirect *, int *, t_minish *) = {ft_infile, 
-		ft_outfile, ft_heredoc, ft_outappend};
+	const int	(*fred[4])(char *, t_redirect *, int *, t_minish *)
+		= {ft_infile, ft_outfile, ft_heredoc, ft_outappend};
 	t_redirect	*ptr;
 
 	ptr = red;

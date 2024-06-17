@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:47:22 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 23:12:46 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/18 00:11:15 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	unlink_all_heredoc(t_minish *minish)
 void	close_all_fd(void)
 {
 	int	i;
-	
+
 	i = 2;
 	while (i++ < 1023)
 		close(i);
@@ -51,6 +51,8 @@ void	free_minish(t_minish *minish)
 	if (!minish)
 		return ;
 	close_all_fd();
+	if (minish->to_free)
+		free(minish->to_free);
 	if (minish->env)
 		ft_free_tab(minish->env);
 	minish->env = NULL;
