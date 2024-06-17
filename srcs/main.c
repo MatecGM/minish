@@ -94,7 +94,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(str);
 			interactive_mode(TRUE, 0);
-			minish.divpipe = ft_parsing(str, minish.env);
+			minish.divpipe = ft_parsing(str, &minish);
 			free(str);
 			if (!minish.divpipe)
 				exit_free(&minish, 1);

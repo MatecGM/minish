@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 17:31:43 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 19:43:51 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ char	*get_heredoc_name()
 	return (name);
 }
 
-int	write_user_entry(int fd, char *heredoc_EOF)
+int	write_user_entry(int fd, char *heredoc_EOF, t_redirect *red, t_minish *minish)
 {
 	char	*line;
 
 	line = readline("> ");
 	while (line && ft_strcmp(line, heredoc_EOF))
 	{
+		if (!red->quote)
+			line = extender(line, minish->env, TRUE);
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);
@@ -76,7 +78,7 @@ int	write_user_entry(int fd, char *heredoc_EOF)
 	return (1);
 }
 
-int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish)
+int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish, t_redirect *red)
 {
 	int	pid;
 	int	status;
@@ -89,7 +91,7 @@ int	create_heredoc_fork(int fd, char *heredoc_EOF, t_minish *minish)
 		if (signal(SIGINT, signal_heredoc) == SIG_ERR)
 			exit_free(minish, -1);
 		manage_static_minish(minish);
-		write_user_entry(fd, heredoc_EOF);
+		write_user_entry(fd, heredoc_EOF, red, minish);
 		exit_free(minish, 0);
 	}
 	waitpid(pid, NULL, 0);
@@ -112,7 +114,7 @@ char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 		free(heredoc_name);
 		return (NULL);
 	}
-	if (!create_heredoc_fork(heredoc_fd, heredoc_EOF, minish))
+	if (!create_heredoc_fork(heredoc_fd, heredoc_EOF, minish, red))
 	{
 		close(heredoc_fd);
 		free(heredoc_name);

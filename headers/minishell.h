@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:22:33 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 20:20:58 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,11 @@ void	append_var(t_minish *minish, char *env_var);
 void	ft_exit(char **tab, t_minish *minish, int fd);
 int		get_name_len(char *env_var);
 
-t_divpipe	*ft_parsing(char *input, char **env);
+t_divpipe	*ft_parsing(char *input, t_minish  *minish);
 char		**ft_split_quote(char *str);
 char		**ft_tokenizer(char *str);
 t_bool		ft_quote_first_arg(char *str);
-char		*extender(char *str, char **env);
+char		*extender(char *str, t_minish *minish, t_bool onheredock);
 t_bool		ft_hasdollars(char *str);
 
 t_divpipe	*ft_pipenew(void);

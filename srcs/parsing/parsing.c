@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/10 13:57:04 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 20:20:42 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 
 }
 
-int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
+int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
 {
 	t_type		ltype;
 	t_type		ctype;
@@ -76,13 +76,13 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, char **env)
 		i ++;
 	}
 	if (ft_hasdollars(cmd))
-		cmd = extender(cmd, env);
+		cmd = extender(cmd, minish, FALSE);
 	cpipe->cmd = ft_split_quote(cmd);
 	free(cmd);
 	return (i);
 }
 
-t_divpipe	*ft_parsing(char *input, char **env)
+t_divpipe	*ft_parsing(char *input, t_minish *minish)
 {
 	char		**toked;
 	t_divpipe	*divpipe;
@@ -101,7 +101,7 @@ t_divpipe	*ft_parsing(char *input, char **env)
 			break;
 		cpipe->redirect = NULL;
 		ft_pipeadd_back(&divpipe, cpipe);
-		i = inpipe(cpipe, toked, i, env);
+		i = inpipe(cpipe, toked, i, minish);
 		if (toked[i])
 			i ++;
 	}

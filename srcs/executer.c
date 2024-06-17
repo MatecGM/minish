@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/15 18:29:08 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/17 19:38:21 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish, int fd)
 		ft_env(divpipe->cmd, minish->env, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "exit"))
 		ft_exit(divpipe->cmd, minish, fd);
-	else if (!strcmp(divpipe->cmd[0], "heredoc"))
-		create_heredoc("EOF", minish, divpipe->redirect);
 	else
 		return (NULL);
 	return (divpipe);
@@ -57,10 +55,8 @@ void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 	close(fd[1]);
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
-	{
 		perror("minish");
-		exit_free(minish, 1);
-	}
+	exit_free(minish, 1);
 }
 
 void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
@@ -101,6 +97,8 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
 	int	child_pid;
 
+	if (!divpipe->cmd[0][0])
+		return (divpipe);
 	if (try_builtins(divpipe, minish, fd[1]))
 		return (divpipe);
 	if (!divpipe->cmd_path)
