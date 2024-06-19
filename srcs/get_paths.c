@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:14:11 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/06 21:35:05 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:47:05 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*try_path(t_divpipe *divpipe, char **paths)
 	int		i;
 
 	if (!divpipe->cmd || !divpipe->cmd[0])
-		return (NULL);
+		return ("UNKNOWN");
 	if (access(divpipe->cmd_path, F_OK | X_OK) == 0
 		|| is_builtin(divpipe->cmd[0]))
 		return ("IS BUILTIN");

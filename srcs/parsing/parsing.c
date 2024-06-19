@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/18 00:16:25 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:45:50 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,20 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
 	return (i);
 }
 
+void	ft_syntax_checker(char **toked)
+{
+	int		i;
+	t_type	type;
+	
+	i = 0;
+	while (toked[i])
+	{
+		type = typage(toked[i]);
+		ft_printf("%d\n", type);
+		i ++;
+	}
+}
+
 t_divpipe	*ft_parsing(char *input, t_minish *minish)
 {
 	char		**toked;
@@ -90,6 +104,7 @@ t_divpipe	*ft_parsing(char *input, t_minish *minish)
 
 	divpipe = NULL;
 	toked = ft_tokenizer(input);
+	ft_syntax_checker(toked);
 	if (!toked)
 		return (NULL);
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:30:55 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/18 00:15:34 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:36:45 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ char	**ft_split_quote(char *str)
 	int		len;
 
 	cmd = NULL;
+	printf("test %s\n", str);
 	j = 0;
-	if (!str[0])
+	if (!str || !str[0])
 	{
 		cmd = ft_calloc(2, sizeof(char *));
 		cmd[0] = ft_strdup(str);

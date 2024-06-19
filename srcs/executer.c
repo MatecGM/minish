@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:21:48 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:29:10 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_divpipe	*executer(t_divpipe	*divpipe, t_minish *minish, int *fd)
 {
 	int	child_pid;
 
-	if (!divpipe->cmd[0][0])
+	if (!divpipe->cmd || !divpipe->cmd[0] || !divpipe->cmd[0][0])
 		return (divpipe);
 	if (try_builtins(divpipe, minish, fd[1]))
 		return (divpipe);

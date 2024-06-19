@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:50:46 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 23:47:27 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/19 19:53:00 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	update_underscore(t_minish *minish)
 	i = 0;
 	if (minish->in_pipe)
 		return ;
-	while (minish->divpipe->cmd[i])
+	while (minish->divpipe->cmd && minish->divpipe->cmd[i])
 	{
 		new_underscore = minish->divpipe->cmd[i];
 		i++;
 	}
+	if (!minish->divpipe->cmd || !minish->divpipe->cmd[0])
+		new_underscore = "";
 	new_underscore = ft_strjoin("_=", new_underscore);
 	minish->to_free = new_underscore;
 	add_var(minish, new_underscore);
