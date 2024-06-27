@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:23:18 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:35:59 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:48:59 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ void	get_input(t_minish *minish, char *str)
 	tmp_pipe = minish->divpipe;
 	minish->in_pipe = minish->divpipe->next != NULL;
 	update_underscore(minish);
-	ft_execpipes(tmp_pipe, minish);
+	if (!minish->synt_err)
+		ft_execpipes(tmp_pipe, minish);
 	unlink_all_heredoc(minish);
 	if (minish->divpipe)
 		ft_free_pipe(minish->divpipe);
 	minish->divpipe = NULL;
+	minish->synt_err = FALSE;
 }
 
 int	main(int argc, char **argv, char **env)

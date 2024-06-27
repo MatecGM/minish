@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:03:27 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/18 00:12:01 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:48:56 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,13 @@ void	wait_all_pipe(t_minish *minish)
 		}
 		tmp_pipe = tmp_pipe->next;
 	}
+}
+
+int	get_good_fd(int pipread, int fd[2], int pip[2], t_divpipe *divpipe)
+{
+	if (fd[0] == -1 && pipread != -1)
+		fd[0] = pipread;
+	if (fd[1] == -1 && pip[1] != -1 && divpipe->next)
+		fd[1] = pip[1];
+	return (pip[0]);
 }

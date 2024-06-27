@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/22 21:44:58 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:48:50 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,60 +81,6 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
 	return (i);
 }
 
-char	*ft_chardup(char c, int i)
-{
-	char *str;
-
-	str = ft_calloc(i + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	while (i > 0)
-	{
-		str[i - 1] = c;
-		i --;
-	}
-	return (str);
-}
-
-t_bool ft_strisspace(char *str)
-{
-	ft_printf("%s\n", str);
-	while (*str)
-	{
-		if (!ft_isspace(*str))
-			return (FALSE); 
-		str ++;
-	}
-	return (TRUE);
-}
-
-void	ft_syntax_checker(char **toked)
-{
-	int		i;
-	t_type	type;
-	char	*err;
-	t_bool	pip;
-	
-	i = 0;
-	pip = FALSE;
-	while (toked[i])
-	{
-		if (ft_strlen(toked[i]) > 2 && (toked[i][0] == '<' || toked[i][0] == '>'))
-		{
-			err = ft_chardup(toked[i][0], ft_strlen(toked[i]) - 2);
-			print_error("minishell: syntax error near unexpected `", err, "'");
-			free(err);
-		}
-		if ((toked[i][0] == '|' && ft_strlen(toked[i]) > 1) || (toked[i][0] == '|' && pip == TRUE))
-			ft_putstr_fd("minishell: syntax error near unexpected `|'\n", 2);
-		if (toked[i][0] == '|')
-			pip = TRUE;
-		else if (!ft_strisspace(toked[i]))
-			pip = FALSE;
-		i ++;
-	}
-}
-
 t_divpipe	*ft_parsing(char *input, t_minish *minish)
 {
 	char		**toked;
@@ -144,7 +90,7 @@ t_divpipe	*ft_parsing(char *input, t_minish *minish)
 
 	divpipe = NULL;
 	toked = ft_tokenizer(input);
-	ft_syntax_checker(toked);
+	ft_syntax_checker(toked, minish);
 	if (!toked)
 		return (NULL);
 	i = 0;

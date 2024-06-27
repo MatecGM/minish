@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:13:26 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/25 20:04:18 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_minish
 	t_divpipe	*divpipe;
 	int			exit_status;
 	int			in_pipe;
+	t_bool		synt_err;
 }	t_minish;
 
 void		ft_envdelone(t_env *env, void (*del)(void *));
@@ -137,5 +138,10 @@ void		wait_all_pipe(t_minish *minish);
 void		unlink_all_heredoc(t_minish *minish);
 void		exit_free_fork(t_minish *minish, int exit_code);
 void		close_all_fd(void);
+int			get_good_fd(int pipread, int fd[2], int pip[2], t_divpipe *divpipe);
+char		*ft_chardup(char c, int i);
+t_bool		ft_strisspace(char *str);
+void		ft_syntax_checker(char **toked, t_minish *minish);
+char		**check_splitquote_str(char *str);
 
 #endif

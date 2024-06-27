@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_extend.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/18 00:21:13 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:48:53 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 	return (quote);
 }
 
+int	is_exit_status(char *str, int *len, int *i, t_minish *minish)
+{
+	if (str[*i + 1] == '?')
+	{
+		*len += ft_intlen(minish->exit_status);
+		*i += 2;
+		return (1);
+	}
+	return (0);
+}
+
 static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 {
 	int		i;
@@ -53,24 +64,18 @@ static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 	{
 		if (str[i] == '$' && !ft_insingle(str, i, onheredock))
 		{
-			if (str[i + 1] == '?')
-			{
-				len += ft_intlen(minish->exit_status);
-				i += 2;
+			if (is_exit_status(str, &len, &i, minish))
 				continue ;
-			}
 			value = get_env_value(minish->env, str + i + 1);
 			len += ft_strlen(value);
 			i ++;
 			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				i ++;
 			free(value);
+			continue ;
 		}
-		else
-		{
-			len ++;
-			i ++;
-		}
+		len ++;
+		i ++;
 	}
 	return (len);
 }

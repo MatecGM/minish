@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/19 19:29:10 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:48:57 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 	exit_free_fork(minish, 1);
 }
 
-void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
+void	ft_execpipes(t_divpipe *divpipe, t_minish *minish)
 {
 	int	fd[2];
 	int	pip[2];
@@ -75,14 +75,11 @@ void	ft_execpipes(t_divpipe	*divpipe, t_minish *minish)
 		ft_redirection(divpipe->redirect, fd, minish);
 		if (check_signal())
 			break ;
-		if (fd[0] == -1 && pipread != -1)
-			fd[0] = pipread;
-		if (fd[1] == -1 && pip[1] != -1 && divpipe->next)
-			fd[1] = pip[1];
-		executer(divpipe, minish, fd);
+		pipread = get_good_fd(pipread, fd, pip, divpipe);
+		if (!(fd[0] == -2 || fd[1] == -2))
+			executer(divpipe, minish, fd);
 		if (divpipe->next)
 			close(pip[1]);
-		pipread = pip[0];
 		if (check_signal())
 			break ;
 		divpipe = divpipe->next;
