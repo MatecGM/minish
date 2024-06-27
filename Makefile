@@ -6,7 +6,7 @@
 #    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/06/25 19:36:54 by mbico            ###   ########.fr        #
+#    Updated: 2024/06/27 19:17:50 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS = main.c\
 		signal_handler_2.c\
 		executer_2.c\
 		parsing/parsing_utils.c\
-		parsing/ft_split_quote_utils.c
+		parsing/ft_split_quote_utils.c\
+		redirect/redirection_utils.c\
 
 LIBFT = libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:11:29 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:49 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:37:05 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,31 @@ t_bool	ft_strisspace(char *str)
 	while (*str)
 	{
 		if (!ft_isspace(*str))
-			return (FALSE); 
+			return (FALSE);
 		str ++;
 	}
 	return (TRUE);
+}
+
+void	ft_syntax_error(int i,	t_minish *minish, char **toked, t_bool pip)
+{
+	char	*err;
+
+	if (!minish->synt_err && (ft_strlen(toked[i]) > 2
+			&& (toked[i][0] == '<' || toked[i][0] == '>')))
+	{
+		err = ft_chardup(toked[i][0], ft_strlen(toked[i]) - 2);
+		print_error("minishell: syntax error near unexpected `", err, "'");
+		free(err);
+		minish->synt_err = TRUE;
+	}
+	else if (!minish->synt_err && ((toked[i][0] == '|'
+			&& ft_strlen(toked[i]) > 1)
+		|| (toked[i][0] == '|' && pip == TRUE)))
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected `|'\n", 2);
+		minish->synt_err = TRUE;
+	}
 }
 
 void	ft_syntax_checker(char **toked, t_minish *minish)
@@ -49,20 +70,7 @@ void	ft_syntax_checker(char **toked, t_minish *minish)
 	pip = FALSE;
 	while (toked[i])
 	{
-		if (!minish->synt_err && (ft_strlen(toked[i]) > 2 && (toked[i][0] == '<'
-			|| toked[i][0] == '>')))
-		{
-			err = ft_chardup(toked[i][0], ft_strlen(toked[i]) - 2);
-			print_error("minishell: syntax error near unexpected `", err, "'");
-			free(err);
-			minish->synt_err = TRUE;
-		}
-		if (!minish->synt_err && ((toked[i][0] == '|' && ft_strlen(toked[i]) > 1)
-			|| (toked[i][0] == '|' && pip == TRUE)))
-		{
-			ft_putstr_fd("minishell: syntax error near unexpected `|'\n", 2);
-			minish->synt_err = TRUE;
-		}
+		ft_syntax_error(i, minish, toked, pip);
 		if (toked[i][0] == '|')
 			pip = TRUE;
 		else if (!ft_strisspace(toked[i]))

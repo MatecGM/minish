@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:03:27 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:56 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:54:29 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	wait_all_pipe(t_minish *minish)
 		}
 		tmp_pipe = tmp_pipe->next;
 	}
+	check_signal(minish);
 }
 
 int	get_good_fd(int pipread, int fd[2], int pip[2], t_divpipe *divpipe)

@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:23:18 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:59 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:29:39 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **env)
 	str = NULL;
 	while (1)
 	{
+		get_exit_status(0, &minish);
 		interactive_mode(TRUE, 1);
 		str = readline("\U00000D9E-> ");
 		if (str && str[0])

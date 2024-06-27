@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:53 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:37:45 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,31 @@ static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 	return (len);
 }
 
-char	*extender(char *str, t_minish *minish, t_bool onheredock)
+t_bool	ft_envvar_exitcode(char *str, t_minish *minish, int *i, char **new)
+{
+	char	*value;
+
+	if (str[*i + 1] == '?')
+	{
+		*i += 2;
+		value = ft_itoa(minish->exit_status);
+		if (!value)
+			exit_free(minish, 1);
+		*new = ft_strcat(*new, value);
+		free(value);
+		return (TRUE);
+	}
+	value = get_env_value(minish->env, str + *i + 1);
+	if (value)
+		*new = ft_strcat(*new, value);
+	free(value);
+	(*i)++;
+	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
+		(*i)++;
+	return (FALSE);
+}
+
+char	*extender(char *str, t_minish *minish, t_bool ohd)
 {
 	int		i;
 	int		j;
@@ -88,41 +112,22 @@ char	*extender(char *str, t_minish *minish, t_bool onheredock)
 	char	*new;
 	t_bool	single_quote;
 
-	new = ft_calloc(ft_strlen_extend(str, minish, onheredock)
-			+ 1, sizeof(char));
+	new = ft_calloc(ft_strlen_extend(str, minish, ohd) + 1, sizeof(char));
 	if (!new)
-		return (NULL);
+		exit_free(minish, 1);
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && !ft_insingle(str, i, onheredock))
+		if (str[i] == '$' && !ft_insingle(str, i, ohd))
 		{
-			if (str[i + 1] == '?')
-			{
-				i += 2;
-				value = ft_itoa(minish->exit_status);
-				if (!value)
-					return (NULL);
-				new = ft_strcat(new, value);
-				free(value);
-				continue ;
-			}
-			value = get_env_value(minish->env, str + i + 1);
-			if (value)
-				new = ft_strcat(new, value);
-			j += ft_strlen(value);
-			free(value);
-			i++;
-			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-				i ++;
+			if (!ft_envvar_exitcode(str, minish, &i, &new))
+				j += ft_strlen(value);
+			continue ;
 		}
-		else
-		{
-			new[j] = str[i];
-			j ++;
-			i ++;
-		}
+		new[j] = str[i];
+		j ++;
+		i ++;
 	}
 	free(str);
 	return (new);

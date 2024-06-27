@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/25 20:04:18 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:25:32 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,9 @@ void		update_shlvl(t_minish *minish);
 void		cd_home(t_minish *minish);
 void		default_cd(char **tab, t_minish *minish);
 void		cd_back(t_minish *minish, int fd);
-int			check_signal(void);
+int			check_signal(t_minish *minish);
 void		manage_static_minish(t_minish *to_set);
 void		signal_heredoc(int signal);
-int			check_signal(void);
 void		manage_static_minish(t_minish *to_set);
 void		signal_heredoc(int signal);
 void		ft_execpipes(t_divpipe	*divpipe, t_minish *minish);
@@ -143,5 +142,8 @@ char		*ft_chardup(char c, int i);
 t_bool		ft_strisspace(char *str);
 void		ft_syntax_checker(char **toked, t_minish *minish);
 char		**check_splitquote_str(char *str);
+t_bool		ft_ambiguous_checker(char *str);
+t_bool		ft_hasspace(char *str);
+int			get_exit_status(int new_value, t_minish *minish);
 
 #endif

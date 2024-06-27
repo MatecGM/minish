@@ -6,39 +6,11 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:58:31 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:55 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:19:56 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_bool	ft_ambiguous_checker(char *str)
-{
-	int	len;
-
-	if (str[0] != '$')
-		return (FALSE);
-	len = 1;
-	while (str[len] && (ft_isalnum(str[len]) || str[len] == '_'))
-		len ++;
-	if (len == ft_strlen(str))
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	ft_hasspace(char *str)
-{
-	int	i;
-	
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isspace(str[i]))
-			return (TRUE);
-		i ++;
-	}
-	return (FALSE);
-}
 
 const int	ft_infile(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
@@ -65,7 +37,7 @@ const int	ft_infile(char *arg, t_redirect *red, int *fd, t_minish *minish)
 
 const int	ft_outfile(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
-	char *extend;
+	char	*extend;
 
 	extend = extender(ft_strdup(arg), minish, FALSE);
 	if (!extend)
@@ -103,7 +75,7 @@ const int	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
 
 const int	ft_outappend(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
-	char *extend;
+	char	*extend;
 
 	extend = extender(ft_strdup(arg), minish, FALSE);
 	if (!extend)

@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:57 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:09:02 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,13 @@ void	ft_execpipes(t_divpipe *divpipe, t_minish *minish)
 		fd[0] = -1;
 		fd[1] = -1;
 		ft_redirection(divpipe->redirect, fd, minish);
-		if (check_signal())
+		if (check_signal(minish))
 			break ;
 		pipread = get_good_fd(pipread, fd, pip, divpipe);
 		if (!(fd[0] == -2 || fd[1] == -2))
 			executer(divpipe, minish, fd);
 		if (divpipe->next)
 			close(pip[1]);
-		if (check_signal())
-			break ;
 		divpipe = divpipe->next;
 	}
 	wait_all_pipe(minish);
