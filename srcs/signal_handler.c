@@ -23,19 +23,18 @@ int	interactive_mode(t_bool change, int new_value)
 	return (is_interactive_mode);
 }
 
-int	get_exit_status(int new_value, t_minish *minish)
+void	get_exit_status(int new_value, t_minish *minish)
 {
-	static int	new_exit_status = 0;
+	static t_minish *saved = NULL;
 
-	if (!new_value && minish && new_exit_status)
+	if (!new_value && minish)
 	{
-		minish->exit_status = new_exit_status;
-		new_exit_status = 0;
-		return (0);
+		saved = minish;
+		return ;
 	}
-	if (new_value)
-		new_exit_status = new_value;
-	return (new_exit_status);
+	if (saved && new_value)
+		saved->exit_status = new_value;
+	return ;
 }
 
 int	check_signal(t_minish *minish)
@@ -48,6 +47,7 @@ int	check_signal(t_minish *minish)
 	if (signal == SIGINT)
 	{
 		rl_replace_line("", 0);
+		printf("\n");
 		rl_on_new_line();
 		if (interactive_mode(FALSE, 0))
 			rl_redisplay();
@@ -60,12 +60,11 @@ void	signal_handler(int signal)
 {
 	if (!g_signal)
 		g_signal = signal;
-	printf("\n");
-	// if (interactive_mode(FALSE, 1))
-	// {
-	// 	if (check_signal(NULL) == SIGINT)
-	// 		get_exit_status(SIGINT, NULL);
-	// }
+	if (interactive_mode(FALSE, 1))
+	{
+		if (check_signal(NULL) == SIGINT)
+			get_exit_status(130, NULL);
+	}
 }
 
 int	init_signal_handler(void)

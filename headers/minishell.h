@@ -144,6 +144,6 @@ void		ft_syntax_checker(char **toked, t_minish *minish);
 char		**check_splitquote_str(char *str);
 t_bool		ft_ambiguous_checker(char *str);
 t_bool		ft_hasspace(char *str);
-int			get_exit_status(int new_value, t_minish *minish);
+void		get_exit_status(int new_value, t_minish *minish);
 
 #endif
