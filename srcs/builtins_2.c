@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:10:18 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/30 18:01:20 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_exit_code(char **tab)
 	return (exit_code);
 }
 
-void	ft_exit(char **tab, t_minish *minish, int fd)
+void	ft_exit(char **tab, t_minish *minish)
 {
 	int	exit_code;
 

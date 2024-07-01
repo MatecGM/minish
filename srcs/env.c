@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:52:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/17 23:42:45 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:34:50 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	get_env_index(char **env, char *name)
 {
-	int	i;
-	int	len;
+	int		i;
+	size_t	len;
 
 	len = 0;
 	while (name[len] && (ft_isalnum(name[len]) || name[len] == '_'))

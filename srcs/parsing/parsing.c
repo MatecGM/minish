@@ -6,36 +6,17 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 20:54:13 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 19:15:07 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:05:59 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_type	typage(char *elem)
+int	ft_add_lostcmd(char **split, char **cmd)
 {
-	if (!ft_strcmp(elem, "<<"))
-		return (theredoc);
-	else if (!ft_strcmp(elem, ">>"))
-		return (tappend);
-	else if (!ft_strcmp(elem, "<"))
-		return (tinfile);
-	else if (!ft_strcmp(elem, ">"))
-		return (toutfile);
-	return (tnull);
-}
+	int		i;
+	char	*tmp;
 
-void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
-{
-	t_redirect	*new;
-	char		**split;
-	int			i;
-	char		*tmp;
-
-	split = ft_split_quote(arg);
-	new = ft_rednew(ltype, split[0]); //a gerer
-	new->quote = ft_quote_first_arg(arg);
-	ft_redadd_back(&(cpipe->redirect), new);
 	i = 1;
 	while (split[i])
 	{
@@ -43,6 +24,11 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 		if (tmp)
 		{
 			*cmd = ft_vajoin(tmp, " ", split[i], NULL);
+			if (!(*cmd))
+			{
+				ft_free_tab(split);
+				return (1);
+			}
 			free(tmp);
 			free(split[i]);
 		}
@@ -51,6 +37,38 @@ void	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
 		i ++;
 	}
 	free(split);
+	return (0);
+}
+
+int	redirect_filler(t_divpipe *cpipe, char *arg, t_type ltype, char **cmd)
+{
+	t_redirect	*new;
+	char		**split;
+
+	split = ft_split_quote(arg);
+	if (!split)
+		return (1);
+	new = ft_rednew(ltype, split[0]);
+	if (!new)
+	{
+		ft_free_tab(split);
+		return (1);
+	}
+	new->quote = ft_quote_first_arg(arg);
+	ft_redadd_back(&(cpipe->redirect), new);
+	if (ft_add_lostcmd(split, cmd))
+		return (1);
+	return (0);
+}
+
+void	ft_stock_cmd_in_minish(char *cmd, t_divpipe *cpipe, t_minish *minish)
+{
+	if (ft_hasdollars(cmd))
+		cmd = extender(cmd, minish, FALSE);
+	cpipe->cmd = ft_split_quote(cmd);
+	free(cmd);
+	if (!cpipe->cmd)
+		exit_free(minish, 1);
 }
 
 int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
@@ -67,17 +85,18 @@ int	inpipe(t_divpipe *cpipe, char **toked, int i, t_minish *minish)
 		if (ctype == tnull)
 		{
 			if (ltype == tnull)
+			{
 				cmd = ft_strdup(toked[i]);
-			else
-				redirect_filler(cpipe, toked[i], ltype, &cmd);
+				if (!cmd)
+					exit_free(minish, 1);
+			}
+			else if (redirect_filler(cpipe, toked[i], ltype, &cmd))
+				exit_free(minish, 1);
 		}
 		ltype = ctype;
 		i ++;
 	}
-	if (ft_hasdollars(cmd))
-		cmd = extender(cmd, minish, FALSE);
-	cpipe->cmd = ft_split_quote(cmd);
-	free(cmd);
+	ft_stock_cmd_in_minish(cmd, cpipe, minish);
 	return (i);
 }
 

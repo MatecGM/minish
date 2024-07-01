@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 20:25:32 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:08:06 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int			init_signal_handler(void);
 int			interactive_mode(t_bool to_change, int new_value);
 int			is_good_env(char *env_var);
 void		append_var(t_minish *minish, char *env_var);
-void		ft_exit(char **tab, t_minish *minish, int fd);
-int			get_name_len(char *env_var);
+void		ft_exit(char **tab, t_minish *minish);
+size_t		get_name_len(char *env_var);
 t_divpipe	*ft_parsing(char *input, t_minish *minish);
 char		**ft_split_quote(char *str);
 char		**ft_tokenizer(char *str);
@@ -145,5 +145,7 @@ char		**check_splitquote_str(char *str);
 t_bool		ft_ambiguous_checker(char *str);
 t_bool		ft_hasspace(char *str);
 void		get_exit_status(int new_value, t_minish *minish);
+t_bool		ft_hasdollars(char *str);
+t_type		typage(char *elem);
 
 #endif

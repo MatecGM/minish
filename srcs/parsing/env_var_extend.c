@@ -6,22 +6,11 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 20:37:45 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 17:57:13 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_bool	ft_hasdollars(char *str)
-{
-	while (str && *str)
-	{
-		if (*str == '$')
-			return (TRUE);
-		str ++;
-	}
-	return (FALSE);
-}
 
 static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 {
@@ -80,9 +69,10 @@ static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 	return (len);
 }
 
-t_bool	ft_envvar_exitcode(char *str, t_minish *minish, int *i, char **new)
+int	ft_envvar_exitcode(char *str, t_minish *minish, int *i, char **new)
 {
 	char	*value;
+	int		len;
 
 	if (str[*i + 1] == '?')
 	{
@@ -92,37 +82,38 @@ t_bool	ft_envvar_exitcode(char *str, t_minish *minish, int *i, char **new)
 			exit_free(minish, 1);
 		*new = ft_strcat(*new, value);
 		free(value);
-		return (TRUE);
+		return (0);
 	}
 	value = get_env_value(minish->env, str + *i + 1);
 	if (value)
 		*new = ft_strcat(*new, value);
+	len = ft_strlen(value);
 	free(value);
 	(*i)++;
 	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
 		(*i)++;
-	return (FALSE);
+	return (len);
 }
 
 char	*extender(char *str, t_minish *minish, t_bool ohd)
 {
 	int		i;
 	int		j;
-	char	*value;
 	char	*new;
-	t_bool	single_quote;
 
 	new = ft_calloc(ft_strlen_extend(str, minish, ohd) + 1, sizeof(char));
 	if (!new)
+	{
+		free(str);
 		exit_free(minish, 1);
+	}
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
 		if (str[i] == '$' && !ft_insingle(str, i, ohd))
 		{
-			if (!ft_envvar_exitcode(str, minish, &i, &new))
-				j += ft_strlen(value);
+			j += ft_envvar_exitcode(str, minish, &i, &new);
 			continue ;
 		}
 		new[j] = str[i];

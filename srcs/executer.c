@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 20:09:02 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 17:38:46 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_divpipe	*try_builtins(t_divpipe	*divpipe, t_minish *minish, int fd)
 	else if (!strcmp(divpipe->cmd[0], "env"))
 		ft_env(divpipe->cmd, minish->env, minish, fd);
 	else if (!strcmp(divpipe->cmd[0], "exit"))
-		ft_exit(divpipe->cmd, minish, fd);
+		ft_exit(divpipe->cmd, minish);
 	else
 		return (NULL);
 	return (divpipe);
@@ -69,7 +69,8 @@ void	ft_execpipes(t_divpipe *divpipe, t_minish *minish)
 	while (divpipe)
 	{
 		if (divpipe->next)
-			pipe(pip);
+			if (pipe(pip) == -1)
+				exit_free(minish, 1);
 		fd[0] = -1;
 		fd[1] = -1;
 		ft_redirection(divpipe->redirect, fd, minish);

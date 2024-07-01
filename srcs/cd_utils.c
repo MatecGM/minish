@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:33:29 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:18:23 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/01 17:40:43 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	cd_home(t_minish *minish)
 		if (access(home, R_OK) == 0)
 		{
 			update_pwd(minish, "OLDPWD=");
-			chdir(home); //home pas protect
+			chdir(home);
 			update_pwd(minish, "PWD=");
 			minish->exit_status = 0;
 		}

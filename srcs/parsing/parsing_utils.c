@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:11:29 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 20:37:05 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 17:39:37 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	ft_syntax_error(int i,	t_minish *minish, char **toked, t_bool pip)
 void	ft_syntax_checker(char **toked, t_minish *minish)
 {
 	int		i;
-	t_type	type;
-	char	*err;
 	t_bool	pip;
 
 	i = 0;
@@ -77,4 +75,15 @@ void	ft_syntax_checker(char **toked, t_minish *minish)
 			pip = FALSE;
 		i ++;
 	}
+}
+
+t_bool	ft_hasdollars(char *str)
+{
+	while (str && *str)
+	{
+		if (*str == '$')
+			return (TRUE);
+		str ++;
+	}
+	return (FALSE);
 }

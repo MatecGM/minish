@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:09:43 by fparis           ###   ########.fr       */
+/*   Updated: 2024/06/30 18:00:44 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	create_heredoc_fork(int fd, char *heredoc_EOF,
 		t_minish *minish, t_redirect *red)
 {
 	int	pid;
-	int	status;
 
 	pid = fork();
 	if (pid == -1)

@@ -6,13 +6,14 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:58:31 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 19:19:56 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:16:52 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-const int	ft_infile(char *arg, t_redirect *red, int *fd, t_minish *minish)
+int	ft_infile(char *arg, __attribute__((unused)) t_redirect *red,
+	int *fd, t_minish *minish)
 {
 	char	*extend;
 
@@ -35,7 +36,8 @@ const int	ft_infile(char *arg, t_redirect *red, int *fd, t_minish *minish)
 	return (1);
 }
 
-const int	ft_outfile(char *arg, t_redirect *red, int *fd, t_minish *minish)
+int	ft_outfile(char *arg, __attribute__((unused)) t_redirect *red,
+		int *fd, t_minish *minish)
 {
 	char	*extend;
 
@@ -58,7 +60,7 @@ const int	ft_outfile(char *arg, t_redirect *red, int *fd, t_minish *minish)
 	return (1);
 }
 
-const int	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
+int	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
 {
 	char	*name;
 
@@ -73,7 +75,8 @@ const int	ft_heredoc(char *arg, t_redirect *red, int *fd, t_minish *minish)
 	return (1);
 }
 
-const int	ft_outappend(char *arg, t_redirect *red, int *fd, t_minish *minish)
+int	ft_outappend(char *arg, __attribute__((unused)) t_redirect *red,
+	int *fd, t_minish *minish)
 {
 	char	*extend;
 
@@ -98,7 +101,7 @@ const int	ft_outappend(char *arg, t_redirect *red, int *fd, t_minish *minish)
 
 void	ft_redirection(t_redirect *red, int *fd, t_minish *minish)
 {
-	const int	(*fred[4])(char *, t_redirect *, int *, t_minish *)
+	static int	(*fred[4])(char *, t_redirect *, int *, t_minish *)
 		= {ft_infile, ft_outfile, ft_heredoc, ft_outappend};
 	t_redirect	*ptr;
 
@@ -106,7 +109,8 @@ void	ft_redirection(t_redirect *red, int *fd, t_minish *minish)
 	while (ptr)
 	{
 		if (!(fd[0] == -2 || fd[1] == -2))
-			fred[ptr->type - 2](ptr->arg, ptr, fd, minish);
+			if (!fred[ptr->type - 2](ptr->arg, ptr, fd, minish))
+				exit_free(minish, 1);
 		if (g_signal)
 			return ;
 		ptr = ptr->next;

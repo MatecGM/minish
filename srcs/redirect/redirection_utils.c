@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 19:14:17 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/27 19:18:07 by mbico            ###   ########.fr       */
+/*   Updated: 2024/06/30 17:59:05 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	ft_ambiguous_checker(char *str)
 {
-	int	len;
+	size_t	len;
 
 	if (str[0] != '$')
 		return (FALSE);

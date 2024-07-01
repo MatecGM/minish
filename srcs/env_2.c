@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 20:41:37 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:25:02 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/01 17:35:16 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_name_len(char *env_var)
+size_t	get_name_len(char *env_var)
 {
 	int	len;
 
@@ -52,25 +52,6 @@ int	get_append_len(char *env_var)
 	while (env_var[len] && env_var[len] != '=')
 		len++;
 	return (ft_strlen(env_var) - len);
-}
-
-char	*get_append(char *env_var, int len)
-{
-	int		i;
-	int		name_len;
-	char	*append;
-
-	append = ft_calloc(sizeof(char), len);
-	if (!append)
-		return (NULL);
-	name_len = ft_strlen(env_var) - len + 1;
-	i = 0;
-	while (env_var[i + name_len])
-	{
-		append[i] = env_var[i + name_len];
-		i++;
-	}
-	return (append);
 }
 
 void	append_var(t_minish *minish, char *env_var)

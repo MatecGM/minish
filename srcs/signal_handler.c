@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:05 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 20:42:36 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:08:55 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	interactive_mode(t_bool change, int new_value)
 
 void	get_exit_status(int new_value, t_minish *minish)
 {
-	static t_minish *saved = NULL;
+	static t_minish	*saved = NULL;
 
 	if (!new_value && minish)
 	{

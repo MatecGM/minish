@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:23:18 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/27 20:29:39 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:08:52 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	print_beautiful_header(void)
 {
 	char	*line;
 	int		fd;
-	int		fd_stdin;
 
 	printf ("\033c\033[0;35m");
 	fd = open("beautiful header", O_RDONLY);
@@ -68,7 +67,8 @@ void	get_input(t_minish *minish, char *str)
 	minish->synt_err = FALSE;
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(__attribute__((unused)) int argc,
+		__attribute__((unused)) char **argv, char **env)
 {
 	t_minish	minish;
 	char		*str;
