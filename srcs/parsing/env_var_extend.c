@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/01 17:57:13 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/01 19:02:40 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 {
 	int	i;
 	int	quote;
+	int	doublequote;
 
 	i = 0;
 	quote = FALSE;
+	doublequote = FALSE;
 	if (onheredock)
 		return (FALSE);
 	while (i < index)
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' && !doublequote)
 			quote = !quote;
+		else if (str[i] == '"' && !quote)
+			doublequote = !doublequote;
 		i ++;
 	}
 	return (quote);
