@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/01 18:08:06 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/04 17:34:25 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,6 @@ t_bool		ft_hasspace(char *str);
 void		get_exit_status(int new_value, t_minish *minish);
 t_bool		ft_hasdollars(char *str);
 t_type		typage(char *elem);
+void		signal_handler(int signal);
 
 #endif

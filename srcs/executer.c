@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:46:47 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/01 17:38:46 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/04 17:54:14 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	exec_fork(t_divpipe	*divpipe, t_minish *minish, int *fd)
 	if (fd[1] != -1)
 		dup2(fd[1], 1);
 	close_all_fd();
-	signal(SIGQUIT, SIG_DFL);
 	if (execve(divpipe->cmd_path, divpipe->cmd, minish->env) == -1)
 		perror("minish");
 	exit_free_fork(minish, 1);

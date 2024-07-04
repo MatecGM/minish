@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:51:05 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/01 18:08:55 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/04 17:55:48 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	interactive_mode(t_bool change, int new_value)
 
 	if (change)
 		is_interactive_mode = new_value;
+	if (change && is_interactive_mode)
+		signal(SIGQUIT, SIG_IGN);
+	else if (change)
+		signal(SIGQUIT, signal_handler);
 	return (is_interactive_mode);
 }
 
@@ -44,6 +48,8 @@ int	check_signal(t_minish *minish)
 	signal = g_signal;
 	if (minish && signal == SIGINT)
 		minish->exit_status = 130;
+	if (minish && signal == SIGQUIT)
+		minish->exit_status = 131;
 	if (signal == SIGINT)
 	{
 		rl_replace_line("", 0);
