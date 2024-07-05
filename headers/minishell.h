@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/04 17:34:25 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/05 18:46:04 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ void		get_exit_status(int new_value, t_minish *minish);
 t_bool		ft_hasdollars(char *str);
 t_type		typage(char *elem);
 void		signal_handler(int signal);
+int			ft_add_lostcmd(char **split, char **cmd);
 
 #endif

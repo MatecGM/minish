@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/01 19:02:40 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/05 18:19:48 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ int	ft_envvar_exitcode(char *str, t_minish *minish, int *i, char **new)
 		value = ft_itoa(minish->exit_status);
 		if (!value)
 			exit_free(minish, 1);
+		len = ft_strlen(value);
 		*new = ft_strcat(*new, value);
 		free(value);
-		return (0);
+		return (len);
 	}
 	value = get_env_value(minish->env, str + *i + 1);
 	if (value)

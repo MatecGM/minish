@@ -6,7 +6,7 @@
 #    By: mbico <mbico@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 15:23:49 by fparis            #+#    #+#              #
-#    Updated: 2024/07/01 18:26:28 by mbico            ###   ########.fr        #
+#    Updated: 2024/07/05 18:47:48 by mbico            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS = main.c\
 		parsing/ft_split_quote_utils.c\
 		redirect/redirection_utils.c\
 		parsing/typage.c\
+		parsing/ft_add_lostcmd.c\
 
 LIBFT = libft/libft.a
 
