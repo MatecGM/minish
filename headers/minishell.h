@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/05 18:46:04 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/08 18:28:50 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ t_bool		ft_hasdollars(char *str);
 t_type		typage(char *elem);
 void		signal_handler(int signal);
 int			ft_add_lostcmd(char **split, char **cmd);
+t_bool		ft_inquote(char *str, int index);
 
 #endif

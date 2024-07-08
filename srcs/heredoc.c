@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:46:10 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/30 18:00:44 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/08 18:37:37 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 	char	*heredoc_name;
 
 	heredoc_name = get_heredoc_name();
-	if (!heredoc_name)
+	if (!heredoc_name || signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		return (NULL);
 	red->heredoc_name = heredoc_name;
 	heredoc_fd = open(heredoc_name, O_RDWR | O_CREAT | O_TRUNC, 0666);
@@ -125,5 +125,7 @@ char	*create_heredoc(char *heredoc_EOF, t_minish *minish, t_redirect *red)
 		return (NULL);
 	}
 	close(heredoc_fd);
+	if (signal(SIGQUIT, signal_handler) == SIG_ERR)
+		return (NULL);
 	return (heredoc_name);
 }

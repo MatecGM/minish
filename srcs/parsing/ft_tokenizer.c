@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/18 00:15:20 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/08 18:27:43 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	is_delimiter(char chara)
+static t_bool	is_delimiter(char *str, int index)
 {
-	if (chara == '|' || chara == '>' || chara == '<')
+	if ((str[index] == '|' || str[index] == '>' || str[index] == '<')
+		&& !ft_inquote(str, index))
 		return (TRUE);
 	return (FALSE);
 }
@@ -28,13 +29,13 @@ static int	countel(char *str)
 	ptr = str;
 	while (*ptr)
 	{
-		if (*ptr && !is_delimiter(*ptr))
+		if (*ptr && !is_delimiter(ptr, ptr - str))
 			nb++;
-		while (*ptr && !is_delimiter(*ptr))
+		while (*ptr && !is_delimiter(ptr, ptr - str))
 			ptr++;
-		if (*ptr && is_delimiter(*ptr))
+		if (*ptr && is_delimiter(ptr, ptr - str))
 			nb++;
-		while (*ptr && is_delimiter(*ptr))
+		while (*ptr && is_delimiter(ptr, ptr - str))
 			ptr++;
 	}
 	return (nb);
@@ -46,9 +47,9 @@ int	split_tab(char *str, int i, int *i_tab, char **tab)
 	int		end;
 	int		j;
 
-	type = is_delimiter(str[i]);
+	type = is_delimiter(str, i);
 	end = i;
-	while (str[end] && is_delimiter(str[end]) == type)
+	while (str[end] && is_delimiter(str, end) == type)
 		end++;
 	tab[*i_tab] = ft_calloc((end - i) + 1, sizeof(char));
 	if (!tab[*i_tab])
