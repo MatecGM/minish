@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:44:59 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/08 18:27:43 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/08 19:10:38 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ static t_bool	is_delimiter(char *str, int index)
 static int	countel(char *str)
 {
 	int		nb;
-	char	*ptr;
+	int		i;
 
 	nb = 0;
-	ptr = str;
-	while (*ptr)
+	i = 0;
+	while (str[i])
 	{
-		if (*ptr && !is_delimiter(ptr, ptr - str))
+		if (str[i] && !is_delimiter(str, i))
 			nb++;
-		while (*ptr && !is_delimiter(ptr, ptr - str))
-			ptr++;
-		if (*ptr && is_delimiter(ptr, ptr - str))
+		while (str[i] && !is_delimiter(str, i))
+			i++;
+		if (str[i] && is_delimiter(str, i))
 			nb++;
-		while (*ptr && is_delimiter(ptr, ptr - str))
-			ptr++;
+		while (str[i] && is_delimiter(str, i))
+			i++;
 	}
 	return (nb);
 }
