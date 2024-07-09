@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/30 18:01:20 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:09:56 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,34 @@ void	ft_env(char **tab, char **env, t_minish *minish, int fd)
 
 int	get_exit_code(char **tab)
 {
-	int	i;
-	int	exit_code;
+	int			i;
+	long long	exit_code;
 
 	exit_code = 0;
+	if (!tab || !tab[1])
+		return (0);
 	i = 0;
-	if (tab && tab[1])
+	while (ft_isspace(tab[1][i]))
+		i++;
+	while (tab[1][i] >= '0' && tab[1][i] <= '9')
 	{
-		i = 0;
-		while (tab[1][i])
-		{
-			if (tab[1][i] < '0' || tab[1][i] > '9')
-			{
-				print_error("minish: exit: ",
-					tab[1], ": numeric argument required");
-				return (2);
-			}
-			else
-				exit_code = exit_code * 10 + (tab[1][i] - '0');
-			i++;
-		}
+		if (exit_code * 10 + (tab[1][i] - '0') < exit_code)
+			break ;
+		exit_code = exit_code * 10 + (tab[1][i] - '0');
+		i++;
+	}
+	if (tab[1][i])
+	{
+		print_error("minish: exit: ",
+			tab[1], ": numeric argument required");
+		return (2);
 	}
 	return (exit_code);
 }
 
 void	ft_exit(char **tab, t_minish *minish)
 {
-	int	exit_code;
+	long long	exit_code;
 
 	ft_putstr_fd("exit\n", 2);
 	exit_code = 0;
