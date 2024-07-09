@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 19:14:17 by mbico             #+#    #+#             */
-/*   Updated: 2024/06/30 17:59:05 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:43:46 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ t_bool	ft_hasspace(char *str)
 		i ++;
 	}
 	return (FALSE);
+}
+
+void	check_access_red(int *fd, char *name, t_minish *minish)
+{
+	if (*fd != -1)
+		return ;
+	if (access(name, F_OK) == -1)
+		print_error("minish: ", name, ": No such file or directory");
+	else
+		print_error("minish: ", name, ": Permission denied");
+	*fd = -2;
+	minish->exit_status = 1;
 }

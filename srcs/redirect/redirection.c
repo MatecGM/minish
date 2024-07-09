@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:58:31 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/01 18:16:52 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:56:12 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ft_infile(char *arg, __attribute__((unused)) t_redirect *red,
 		close(fd[0]);
 	if (!minish)
 		return (0);
-	fd[0] = open(arg, O_RDONLY);
+	fd[0] = open(extend, O_RDONLY);
+	check_access_red(&fd[0], extend, minish);
 	free(extend);
 	return (1);
 }
@@ -56,6 +57,7 @@ int	ft_outfile(char *arg, __attribute__((unused)) t_redirect *red,
 	if (!minish)
 		return (0);
 	fd[1] = open(extend, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	check_access_red(&fd[1], extend, minish);
 	free(extend);
 	return (1);
 }
@@ -95,6 +97,7 @@ int	ft_outappend(char *arg, __attribute__((unused)) t_redirect *red,
 	if (!minish)
 		return (0);
 	fd[1] = open(extend, O_WRONLY | O_CREAT | O_APPEND, 0666);
+	check_access_red(&fd[1], extend, minish);
 	free(extend);
 	return (1);
 }
