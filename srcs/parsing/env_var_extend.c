@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_extend.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/05 18:19:48 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/10 19:03:45 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ int	is_exit_status(char *str, int *len, int *i, t_minish *minish)
 	return (0);
 }
 
+t_bool	ft_dollars_only(char *str, int i, t_bool ohd)
+{
+	return (str[i] == '$' && !(!str[i + 1] || str[i + 1] == '"'
+		|| ft_isspace(str[i + 1])) && !ft_insingle(str, i, ohd));
+}
+
 static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 {
 	int		i;
@@ -55,7 +61,7 @@ static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && !ft_insingle(str, i, onheredock))
+		if (ft_dollars_only(str, i, onheredock))
 		{
 			if (is_exit_status(str, &len, &i, minish))
 				continue ;
@@ -116,7 +122,7 @@ char	*extender(char *str, t_minish *minish, t_bool ohd)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && !ft_insingle(str, i, ohd))
+		if (ft_dollars_only(str, i, ohd))
 		{
 			j += ft_envvar_exitcode(str, minish, &i, &new);
 			continue ;
