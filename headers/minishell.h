@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 19:02:32 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/09 19:43:23 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/10 21:54:50 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,7 @@ void		signal_handler(int signal);
 int			ft_add_lostcmd(char **split, char **cmd);
 t_bool		ft_inquote(char *str, int index);
 void		check_access_red(int *fd, char *name, t_minish *minish);
+t_bool		ft_dollars_only(char *str, int i, t_bool ohd);
+t_bool		ft_insingle(char *str, int index, t_bool onheredock);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:22:33 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/10 19:03:45 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/10 21:54:52 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	ft_insingle(char *str, int index, t_bool onheredock)
+t_bool	ft_insingle(char *str, int index, t_bool onheredock)
 {
 	int	i;
 	int	quote;
@@ -43,12 +43,6 @@ int	is_exit_status(char *str, int *len, int *i, t_minish *minish)
 		return (1);
 	}
 	return (0);
-}
-
-t_bool	ft_dollars_only(char *str, int i, t_bool ohd)
-{
-	return (str[i] == '$' && !(!str[i + 1] || str[i + 1] == '"'
-		|| ft_isspace(str[i + 1])) && !ft_insingle(str, i, ohd));
 }
 
 static int	ft_strlen_extend(char *str, t_minish *minish, t_bool onheredock)

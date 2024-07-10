@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/09 19:09:56 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/10 21:52:01 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,23 @@ void	ft_env(char **tab, char **env, t_minish *minish, int fd)
 	minish->exit_status = 0;
 }
 
-int	get_exit_code(char **tab)
+int	is_negative(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i])
+	{
+		if (str[i] == '-')
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+long long	get_exit_code(char **tab)
 {
 	int			i;
 	long long	exit_code;
@@ -61,6 +77,8 @@ int	get_exit_code(char **tab)
 		return (0);
 	i = 0;
 	while (ft_isspace(tab[1][i]))
+		i++;
+	if (tab[1][i] == '+' || tab[1][i] == '-')
 		i++;
 	while (tab[1][i] >= '0' && tab[1][i] <= '9')
 	{
@@ -75,7 +93,7 @@ int	get_exit_code(char **tab)
 			tab[1], ": numeric argument required");
 		return (2);
 	}
-	return (exit_code);
+	return (exit_code * is_negative(tab[1]));
 }
 
 void	ft_exit(char **tab, t_minish *minish)
