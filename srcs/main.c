@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:23:18 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/09 19:50:55 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/14 01:15:33 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	get_input(t_minish *minish, char *str)
 
 	add_history(str);
 	interactive_mode(TRUE, 0);
+	if (!ft_strcmp(str, "|"))
+		ft_putstr_fd("minish: syntax error near unexpected token `|'\n", 2);
+	else if (typage(str))
+		ft_putstr_fd("minish: syntax error near unexpected token `newline'\n", 2);
 	minish->divpipe = ft_parsing(str, minish);
 	free(str);
 	if (!minish->divpipe)

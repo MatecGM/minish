@@ -6,7 +6,7 @@
 /*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:11:29 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/01 17:39:37 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/14 01:15:47 by mbico            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_syntax_error(int i,	t_minish *minish, char **toked, t_bool pip)
 			&& (toked[i][0] == '<' || toked[i][0] == '>')))
 	{
 		err = ft_chardup(toked[i][0], ft_strlen(toked[i]) - 2);
-		print_error("minishell: syntax error near unexpected `", err, "'");
+		print_error("minishell: syntax error near unexpected token `", err, "'");
 		free(err);
 		minish->synt_err = TRUE;
 	}
@@ -54,7 +54,7 @@ void	ft_syntax_error(int i,	t_minish *minish, char **toked, t_bool pip)
 			&& ft_strlen(toked[i]) > 1)
 		|| (toked[i][0] == '|' && pip == TRUE)))
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected `|'\n", 2);
+		ft_putstr_fd("minish: syntax error near unexpected token `|'\n", 2);
 		minish->synt_err = TRUE;
 	}
 }
