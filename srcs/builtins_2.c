@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 20:50:08 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/10 21:52:01 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/13 20:53:21 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ void	ft_exit(char **tab, t_minish *minish)
 	long long	exit_code;
 
 	ft_putstr_fd("exit\n", 2);
-	exit_code = 0;
+	exit_code = minish->exit_status;
 	if (ft_strtablen(tab) > 2)
 	{
 		ft_putstr_fd("minish: exit: too many arguments\n", 2);
 		minish->exit_status = 1;
 		return ;
 	}
-	else
+	else if (ft_strtablen(tab) > 1)
 		exit_code = get_exit_code(tab) & 255;
 	minish->exit_status = exit_code;
 	if (!tab || minish->in_pipe)

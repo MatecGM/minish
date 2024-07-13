@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:33:29 by fparis            #+#    #+#             */
-/*   Updated: 2024/07/01 17:40:43 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/13 20:59:59 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	default_cd(char **tab, t_minish *minish)
 		if (!tab[1][0] || access(tab[1], R_OK) == 0)
 		{
 			update_pwd(minish, "OLDPWD=");
-			chdir(tab[1]);
+			if (chdir(tab[1]) == -1)
+				perror("cd");
 			update_pwd(minish, "PWD=");
 			minish->exit_status = 0;
 		}

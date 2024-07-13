@@ -6,7 +6,7 @@
 /*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 18:47:22 by fparis            #+#    #+#             */
-/*   Updated: 2024/06/18 00:11:15 by fparis           ###   ########.fr       */
+/*   Updated: 2024/07/13 20:51:16 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,15 @@ void	exit_free(t_minish *minish, int exit_code)
 {
 	unlink_all_heredoc(minish);
 	free_minish(minish);
+	if (!exit_code)
+		exit_code = minish->exit_status;
 	exit(exit_code);
 }
 
 void	exit_free_fork(t_minish *minish, int exit_code)
 {
 	free_minish(minish);
+	if (!exit_code)
+		exit_code = minish->exit_status;
 	exit(exit_code);
 }
