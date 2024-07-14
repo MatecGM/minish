@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbico <mbico@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fparis <fparis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:11:29 by mbico             #+#    #+#             */
-/*   Updated: 2024/07/14 01:15:47 by mbico            ###   ########.fr       */
+/*   Updated: 2024/07/14 19:46:11 by fparis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	ft_syntax_error(int i,	t_minish *minish, char **toked, t_bool pip)
 			&& (toked[i][0] == '<' || toked[i][0] == '>')))
 	{
 		err = ft_chardup(toked[i][0], ft_strlen(toked[i]) - 2);
-		print_error("minishell: syntax error near unexpected token `", err, "'");
+		print_error("minishell: syntax error near unexpected token `",
+			err, "'");
 		free(err);
 		minish->synt_err = TRUE;
 	}
